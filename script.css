@@ -1,0 +1,156 @@
+.product_wrapper {
+  position: relative;
+  /* padding: 24px; */
+  width: min-content;
+  height: min-content;
+  background: transparent;
+}
+
+.product_image_wrapper {
+  position: relative;
+  background: transparent;
+  width: min-content;
+  height: min-content;
+  overflow: hidden;
+}
+
+.product_image {
+  width: 100% !important;
+  height: auto;
+}
+
+.product_name {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  color: #000000;
+}
+
+.product_desc {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  opacity: 0.2;
+}
+
+.product_button {
+  transition: 0.5s all ease-in-out;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 15px 32px;
+  gap: 10px;
+  height: 48px;
+  width: 100%;
+  margin-top: 32px;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+.product_button:hover {
+  cursor: pointer;
+}
+
+.timer_container {
+  transition: 0.5s all ease-in-out;
+  display: flex;
+  opacity: 0;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 8px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 8px;
+  top: 8px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.timer_container_w {
+  transition: 0.5s all ease-in-out;
+  display: flex;
+  opacity: 0;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 8px;
+  position: absolute;
+  width: max-content !important;
+  height: 40px;
+  right: 8px;
+  top: 8px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.timer {
+  height: 5px;
+  width: 0px;
+  left: 12px;
+  top: 7px;
+  border-radius: 0px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: max-content;
+  padding: 5px 2px;
+  font-size: 13px;
+  z-index: 2;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgIcon {
+  width: 17px;
+  height: 17px;
+  margin-right: 3px;
+}
+
+.downloadQR {
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  transition: 0.5s all ease-in-out;
+  margin: 20px;
+}
+
+.downloadQR:hover {
+  background-color: darkblue;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .product_wrapper {
+    width: 100%;
+  }
+}
