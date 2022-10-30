@@ -334,7 +334,7 @@ async function createDownload() {
   document.body.appendChild(newdiv);
 
   const downloadlink = document.createElement("a");
-  downloadlink.href = ` https://play.google.com/store/apps/details?id=com.kaalaa_app&referrer=utm_source%3Dgoogle%26utm_campaign%3D${getCookie(
+  downloadlink.href = `https://play.google.com/store/apps/details?id=com.kaala.kaalaa&referrer=utm_source%3Dgoogle%26utm_campaign%3D${getCookie(
     "Kaalaa"
   )}`;
   downloadlink.target = "_blank";
