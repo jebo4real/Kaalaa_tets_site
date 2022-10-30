@@ -101,7 +101,7 @@ async function request(url, obj) {
         Authorization: `Basic ${credentials}`,
       },
       body: JSON?.stringify(obj),
-    })
+    });
 
     const data = await response.json();
     // console.log("Req res: ", data);
@@ -416,37 +416,44 @@ document.addEventListener("mouseover", (e) => {
 
   const timer_container = document.getElementById(e.target.dataset.timer);
 
-  console.log("Plain: ", idPlain);
+  // console.log("Plain: ", idPlain);
+  // console.log("Images: ", images);
   // console.log("Sure: ", images[0].index);
   if (id.includes("_")) {
-    setTimeout(() => {
-      const active = e.target.matches(":hover");
-      const imagesExist = images.findIndex(
-        (e) => e?.index?.toString() === idPlain
-      );
-      const activeExist = activeImages.findIndex((e) => e === idPlain);
+    const started = images.findIndex((e) => e.index?.toString() === idPlain);
+    console.log("Started: ", started);
 
-      console.log({
-        activeExist,
-        imagesExist,
-        idPlain,
-        active,
-      });
-      if (
-        activeExist === -1 &&
-        imagesExist !== -1 &&
-        idPlain &&
-        idPlain !== "" &&
-        !isMobile &&
-        active
-      ) {
-        activeImages.push(idPlain);
-        if (!timer_container.dataset.claimed)
-          timer_container.innerHTML = moveTime;
-      }
-      // console.log("Active: ", activeImages);
-      timer_container.style.opacity = 1;
-    }, 3000);
+    setTimeout(
+      () => {
+        const active = e.target.matches(":hover");
+        const imagesExist = images.findIndex(
+          (e) => e?.index?.toString() === idPlain
+        );
+        const activeExist = activeImages.findIndex((e) => e === idPlain);
+
+        console.log({
+          activeExist,
+          imagesExist,
+          idPlain,
+          active,
+        });
+        if (
+          activeExist === -1 &&
+          imagesExist !== -1 &&
+          idPlain &&
+          idPlain !== "" &&
+          !isMobile &&
+          active
+        ) {
+          activeImages.push(idPlain);
+          if (!timer_container.dataset.claimed)
+            timer_container.innerHTML = moveTime;
+        }
+        // console.log("Active: ", activeImages);
+        timer_container.style.opacity = 1;
+      },
+      started !== -1 && images[started].timer < 9 ? 0 : 3000
+    );
   }
 });
 
@@ -476,24 +483,24 @@ document.addEventListener("click", (e) => {
   const reward = e.target.dataset.reward;
 
   if (itemId && reward) {
-    e.preventDefault()
+    e.preventDefault();
     current_reward = { itemId, amount: 1 };
     modalDisplay();
-    return
+    return;
   }
 
   if (id === "claim_reward_button") {
-    e.preventDefault()
+    e.preventDefault();
     request("reward/add", {
       ...current_reward,
       userId: getCookie("Kaalaa"),
     });
-    return
+    return;
   }
 
   if (id === "kaalaa_claim_close") {
     hideModal();
-    return
+    return;
   }
 
   if (id === "kaalaa_claim_modal") e.target.style.display = "none";
