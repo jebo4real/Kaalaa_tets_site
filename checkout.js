@@ -197,8 +197,8 @@ document.addEventListener("click", (e) => {
         const cart = document.getElementById("cart_total");
         if (cart) cart.innerHTML = "$" + (160 - parseInt(amount)) || 160;
 
-        // const modal = document.getElementById("kaalaa_claim_modal");
-        // if (modal) modal.remove();
+        const modal = document.getElementById("kaalaa_claim_modal");
+        if (modal) modal.remove();
       }
     }
   }
