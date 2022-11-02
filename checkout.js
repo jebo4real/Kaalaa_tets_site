@@ -119,12 +119,12 @@ function modalDisplay() {
   loaderIcon.innerHTML = request_loader;
 
   const modalTitle = document.createElement("h2");
-  modalTitle.innerHTML = "$ " + balance + " total";
+  modalTitle.style.fontSize = "18px";
+  modalTitle.innerHTML = "$" + balance + " rewards recieved";
   modalTitle.className = "modal-title";
 
   const modalDesc = document.createElement("p");
-  modalDesc.innerHTML =
-    "Input the reward amount you wish to claim from $" + balance;
+  modalDesc.innerHTML = "Input the reward amount you wish to claim below.";
   modalDesc.className = "modal-desc";
 
   const modalbutton1 = document.createElement("input");
@@ -174,17 +174,19 @@ document.addEventListener("click", (e) => {
       amount = amount.value;
       if (amount < 1) {
         error.innerHTML = "amount can't be less that $1.";
-        return
+        return;
       }
-      if (amount > balance){
+      if (amount > balance) {
         error.innerHTML =
           "The maximum amount you can claim is $" + balance + ".";
-        return
+        return;
       }
 
-      const reward_container = document.getElementById("Kaalaa_discount_container")
-      if(reward_container){
-        reward_container.style.display = "block"
+      const reward_container = document.getElementById(
+        "Kaalaa_discount_container"
+      );
+      if (reward_container) {
+        reward_container.style.display = "block";
       }
     }
   }
