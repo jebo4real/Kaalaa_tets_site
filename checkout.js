@@ -146,8 +146,9 @@ function modalDisplay() {
   modalStatusWrapper.appendChild(modalbutton2);
 
   const error = document.createElement("p");
-  error.style.fontSize = 12;
+  error.style.fontSize = "14px";
   error.style.color = "red";
+  error.style.textAlign = "center";
   error.id = "modal-error-message";
 
   modalStatusWrapper.appendChild(error);
@@ -188,6 +189,13 @@ document.addEventListener("click", (e) => {
       );
       if (reward_container) {
         reward_container.style.display = "block";
+        const discount = document.getElementById("Kaalaa_reward_amount");
+        if (discount) {
+          discount.innerHTML = "- $" + amount;
+        }
+
+        const cart = document.getElementById("cart_total");
+        if (cart) cart.innerHTML = "$" + 160 - amount;
       }
     }
   }
