@@ -136,6 +136,7 @@ function modalDisplay() {
   const modalbutton2 = document.createElement("button");
   modalbutton2.innerHTML = "Claim reward";
   modalbutton2.className = "modal-button";
+  modalbutton2.id = "modal-claim-button";
   modalbutton2.style.backgroundColor = "black";
   modalbutton2.style.color = "white";
 
@@ -167,7 +168,7 @@ document.addEventListener("click", (e) => {
   if (id === "Kaalaa_redeem") {
     modalDisplay();
   }
-  if (id === "modal-button") {
+  if (id === "modal-claim-button") {
     let amount = document.getElementById("claim_reward_value");
     if (amount) {
       const error = document.getElementById("modal-error-message");
