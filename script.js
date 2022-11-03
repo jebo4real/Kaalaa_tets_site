@@ -217,7 +217,11 @@ function startTimer() {
             timer.style.width = "max-content";
             if (active) timer.style.opacity = 1;
             timer.style.cursor = "pointer";
-            timer.innerHTML = newReward + (claimed ? "" : " Earn <span style='color: linear-gradient(270deg, #5200FF 0%, #8F00FF 100%);'>$1</span>");
+            timer.innerHTML =
+              newReward +
+              (claimed
+                ? ""
+                : " Earn <span style='color: linear-gradient(270deg, #5200FF 0%, #8F00FF 100%);'>$1</span>");
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
             timer.setAttribute("data-reward", "yes");
           }
@@ -439,9 +443,10 @@ document.addEventListener("click", async (e) => {
     let token = getElementById("pair_token_value");
     if (!token) return;
 
+    token = token.value
     const error = getElementById("modal-error-message");
     error.innerHTML = "";
-    if (token.value !== "") {
+    if (token !== "") {
       const modalStatus = getElementById("modalStatusContainer");
       let prev = "";
       if (modalStatus) {
@@ -449,7 +454,10 @@ document.addEventListener("click", async (e) => {
         modalStatus.innerHTML = request_loader;
       }
 
-      const req = await request("user/update", { notificationId: token });
+      const req = await request("user/update", {
+        notificationId: token,
+        userId: getCookie("Kaalaa"),
+      });
       if (req.status) {
         // hideModal();
         modalStatus.innerHTML =
