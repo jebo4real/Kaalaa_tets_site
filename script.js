@@ -484,7 +484,7 @@ document.addEventListener("click", async (e) => {
       userId: getCookie("Kaalaa"),
     });
 
-    const timer = getElementById(obj?.itemId);
+    const timer = getElementById(current_reward?.itemId);
     if (timer && req.status) {
       if (req.status) {
         timer.setAttribute("data-claimed", "yes");
