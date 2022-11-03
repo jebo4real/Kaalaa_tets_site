@@ -320,13 +320,10 @@ async function createDownload() {
   downloadlink2.id = "Kaalaa_auto_link";
 
   await generateQRCode(getCookie("Kaalaa"));
+  document.body.appendChild(newdiv);
 
-  const newdiv2 = document.createElement("div");
-  newdiv2.style.padding = "20px";
-  document.body.appendChild(newdiv2);
-
-  newdiv2.appendChild(downloadlink);
-  newdiv2.appendChild(downloadlink2);
+  newdiv.appendChild(downloadlink);
+  newdiv.appendChild(downloadlink2);
 }
 
 
