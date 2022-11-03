@@ -13,15 +13,9 @@ let images = [];
 let activeImages = [];
 let active = "";
 let user = {};
-const stopTime = `
-<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="46" height="46" fill="url(#pattern0)"/>
-<defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_62_542" transform="scale(0.005)"/>
-</pattern>
-<image id="image0_62_542" width="200" height="200" xlink:href="data:image/png;base64,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"/>
-</defs>
+const stopTime = `<svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="8" cy="8" r="5.5" stroke="white"/>
+<path d="M8 5V8" stroke="white" stroke-linecap="round"/>
 </svg>
 `;
 const moveTime = `<svg xmlns:svg="http://www.w3.org/2000/svg" 
@@ -29,10 +23,10 @@ xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 version="1.0" width="64px" height="64px" 
 viewBox="0 0 128 128" xml:space="preserve">
-<rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
 <g>
-<path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#000000"/>
-<path d="M58.25 5h11.3v59h-11.3V5z" fill="#000000"/>
+<path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#FFFFFF"/>
+<path d="M58.25 5h11.3v59h-11.3V5z" fill="#FFFFFF"/>
 <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2880ms" repeatCount="indefinite"/>
 </g>
 </svg>`;
@@ -42,21 +36,24 @@ const reward = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmln
 <path d="M7 12.5V18.5L10 17.0333M13 12.5V18.5L10 17.0333M10 17.0333V14.1667" stroke="black" stroke-linejoin="round"/>
 </svg>
 `;
-const rewardModal = `<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="48" cy="40" r="14.5" stroke="black" stroke-width="3"/>
-<path d="M49.7493 7.61375C48.7774 6.66177 47.2226 6.66177 46.2507 7.61375L37.952 15.7419L26.3364 15.8625C24.976 15.8766 23.8766 16.976 23.8625 18.3364L23.7419 29.952L15.6137 38.2507C14.6618 39.2226 14.6618 40.7774 15.6137 41.7493L23.7419 50.048L23.8625 61.6636C23.8766 63.024 24.976 64.1234 26.3364 64.1375L37.952 64.258L46.2507 72.3862C47.2226 73.3382 48.7774 73.3382 49.7493 72.3863L58.048 64.258L69.6636 64.1375C71.024 64.1234 72.1234 63.024 72.1375 61.6636L72.258 50.048L80.3863 41.7493C81.3382 40.7774 81.3382 39.2226 80.3863 38.2507L72.258 29.952L72.1375 18.3364C72.1234 16.976 71.024 15.8766 69.6636 15.8625L58.048 15.7419L49.7493 7.61375ZM58.1916 15.8826L58.1908 15.8818C58.1911 15.8821 58.1914 15.8823 58.1917 15.8826L57.8418 16.2398L58.1916 15.8826Z" stroke="black" stroke-width="3" stroke-linejoin="round"/>
-<path d="M32 65V88L48 80.6667M64 65V88L48 80.6667M48 80.6667V73.3333" stroke="black" stroke-width="3" stroke-linejoin="round"/>
+const newReward = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 3V2C9 1.44772 9.44772 1 10 1C10.5523 1 11 1.44772 11 2C11 2.55228 10.5523 3 10 3H9ZM10 0C11.1046 0 12 0.895431 12 2C12 3.10457 11.1046 4 10 4H9H8H7H6C4.89543 4 4 3.10457 4 2C4 0.895431 4.89543 0 6 0C7.10457 0 8 0.895431 8 2C8 0.895431 8.89543 0 10 0ZM2.5 5C2.22386 5 2 5.22386 2 5.5V8H3L7.5 8V5H2.5ZM7.5 9H3V13.5C3 13.7761 3.22386 14 3.5 14H7.5V9ZM8.5 9H13V13.5C13 13.7761 12.7761 14 12.5 14H8.5V9ZM8.5 8V5H13.5C13.7761 5 14 5.22386 14 5.5V8H13H8.5ZM7 2V3H6C5.44772 3 5 2.55228 5 2C5 1.44772 5.44772 1 6 1C6.55228 1 7 1.44772 7 2Z" fill="white"/>
+</svg>
+`;
+const rewardModal = `<svg width="96" height="96" viewBox="0 0 96 96" fill="rgba(0,0,0,0)" xmlns="http://www.w3.org/2000/svg">
+<rect width="96" height="96" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M43 28V22C43 18.6863 40.3137 16 37 16C33.6863 16 31 18.6863 31 22C31 25.3137 33.6863 28 37 28H43ZM37 8C29.268 8 23 14.268 23 22C23 24.9745 23.9276 27.7323 25.5094 30H16C13.7909 30 12 31.7909 12 34V50C12 52.2091 13.7909 54 16 54L16 84C16 86.2091 17.7909 88 20 88H76C78.2091 88 80 86.2091 80 84V54C82.2091 54 84 52.2091 84 50V34C84 31.7909 82.2091 30 80 30H70.4906C72.0724 27.7323 73 24.9745 73 22C73 14.268 66.732 8 59 8C54.5381 8 50.5637 10.0873 48 13.3388C45.4363 10.0873 41.4619 8 37 8ZM20 38V46H44V38H20ZM52 38V46H76V38H52ZM44 56H24V80H44V56ZM52 80V56H72V80H52ZM53 22V28H59C62.3137 28 65 25.3137 65 22C65 18.6863 62.3137 16 59 16C55.6863 16 53 18.6863 53 22Z" fill="#222222"/>
 </svg>
 `;
 const closeModal = `<svg id="kaalaa_claim_close" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0111 6.05016L18.4807 6.58049L13.0613 11.9999L18.4807 17.4193L19.0111 17.9497L17.9504 19.0103L17.4201 18.48L12.0006 13.0606L6.58122 18.48L6.05089 19.0103L4.99023 17.9497L5.52056 17.4193L10.94 11.9999L5.52057 6.58049L4.99024 6.05016L6.0509 4.9895L6.58123 5.51983L12.0006 10.9392L17.4201 5.51983L17.9504 4.9895L19.0111 6.05016Z" fill="black"/>
 </svg>
 `;
-const request_loader = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(241, 242, 243); display: block; shape-rendering: auto;" width="60px" height="60px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+const request_loader = `<div style="width: 232px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: white; display: block; shape-rendering: auto;" width="60px" height="60px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 <circle cx="50" cy="50" fill="none" stroke="#1d0e0b" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
   <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
 </circle>
-<!-- [ldio] generated by https://loading.io/ --></svg>`;
+<!-- [ldio] generated by https://loading.io/ --></svg></div>`;
 
 let current_reward = {};
 
@@ -80,18 +77,12 @@ const getMeta = async () => {
 
 async function request(url, obj) {
   try {
-    if (obj.itemId) {
-      const modalStatus = document.getElementById("modalStatusContainer");
-      if (modalStatus) modalStatus.innerHTML = request_loader;
-    }
     // if (!obj.userId && url !== "user") return;
     var credentials = btoa(
       "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==" +
         ":" +
         "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA=="
     );
-
-    var auth = { Authorization: `Basic ${credentials}` };
 
     const response = await fetch(baseURL + url, {
       method: "POST",
@@ -104,23 +95,14 @@ async function request(url, obj) {
     });
 
     const data = await response.json();
-    // console.log("Req res: ", data);
-    if (obj.itemId) {
-      const timer = document.getElementById(obj?.itemId);
-      if (timer && data.status) {
-        if (data.status) {
-          timer.setAttribute("data-claimed", "yes");
-          timer.innerHTML = reward;
-        }
-      }
-      hideModal();
-    }
+
     return data;
   } catch (e) {
-    if (obj.itemId) {
-      hideModal();
-    }
     console.error(e);
+    return {
+      status: false,
+      message: "An error occured, please try again later.",
+    };
   }
 }
 
@@ -187,9 +169,9 @@ function createWrapper(img) {
 function startTimer() {
   setInterval(async () => {
     await images.forEach((img) => {
-      const id = /*img.data.src + "-" +*/ img.index;
-      const timer = document.getElementById(img.data.src + "-" + img.index);
-      const element = document.getElementById(img.data.src + "-" + img.index);
+      const id = img.index;
+      const timer = getElementById(img.data.src + "-" + img.index);
+      const element = getElementById(img.data.src + "-" + img.index);
       const view = element
         ? elementInViewport(element)
         : elementInViewport(img.data);
@@ -197,13 +179,6 @@ function startTimer() {
       const active = activeImages.findIndex(
         (e) => e === img?.index?.toString()
       );
-      // console.log(view, existImages);
-      // if (view && isMobile && timer) {
-      //   timer.innerHTML = moveTime;
-      // }
-      // if (!view && isMobile && timer) {
-      //   timer.innerHTML = stopTime;
-      // }
 
       if (view && existImages !== -1) {
         let currImg = [...images];
@@ -231,7 +206,7 @@ function startTimer() {
           });
         // console.log(img.data.src + "-" + img.index, timer)
 
-        const button = document.getElementById(img.index + "_product_button");
+        const button = getElementById(img.index + "_product_button");
 
         if (timer) {
           if (images[existImages].timer === 0) {
@@ -240,7 +215,7 @@ function startTimer() {
             timer.style.width = "max-content";
             timer.style.opacity = 1;
             timer.style.cursor = "pointer";
-            timer.innerHTML = reward + (claimed ? "" : " Claim for $1");
+            timer.innerHTML = newReward + (claimed ? "" : " Earn $1");
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
             timer.setAttribute("data-reward", "yes");
           }
@@ -249,8 +224,6 @@ function startTimer() {
         }
       }
     });
-
-    // console.log("Images: ", images);
   }, 1000);
 }
 
@@ -308,6 +281,7 @@ document.onreadystatechange = async () => {
     // console.log("Images: ", images);
     startTimer();
   }
+  createManualLink();
 };
 
 async function generateQRCode(data) {
@@ -348,6 +322,19 @@ async function createDownload() {
   document.body.appendChild(newdiv2);
 
   newdiv2.appendChild(downloadlink);
+}
+
+async function createManualLink() {
+  const downloadlink = document.createElement("button");
+  downloadlink.className = "modal-button";
+  downloadlink.innerText = "Link device";
+  downloadlink.id = "Kaalaa_auto_link";
+
+  const newdiv = document.createElement("div");
+  newdiv.style.padding = "20px";
+  document.body.appendChild(newdiv);
+
+  newdiv.appendChild(downloadlink);
 }
 
 window.onscroll = async function (e) {
@@ -414,7 +401,7 @@ document.addEventListener("mouseover", (e) => {
   const idPlain = splitGetIndex(id);
   // console.log(active, idPlain);
 
-  const timer_container = document.getElementById(e.target.dataset.timer);
+  const timer_container = getElementById(e.target.dataset.timer);
 
   // console.log("Plain: ", idPlain);
   // console.log("Images: ", images);
@@ -422,38 +409,35 @@ document.addEventListener("mouseover", (e) => {
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
+    if (started !== -1 && images[started].timer < 10) return;
+    setTimeout(() => {
+      const active = e.target.matches(":hover");
+      const imagesExist = images.findIndex(
+        (e) => e?.index?.toString() === idPlain
+      );
+      const activeExist = activeImages.findIndex((e) => e === idPlain);
 
-    setTimeout(
-      () => {
-        const active = e.target.matches(":hover");
-        const imagesExist = images.findIndex(
-          (e) => e?.index?.toString() === idPlain
-        );
-        const activeExist = activeImages.findIndex((e) => e === idPlain);
-
-        console.log({
-          activeExist,
-          imagesExist,
-          idPlain,
-          active,
-        });
-        if (
-          activeExist === -1 &&
-          imagesExist !== -1 &&
-          idPlain &&
-          idPlain !== "" &&
-          !isMobile &&
-          active
-        ) {
-          activeImages.push(idPlain);
-          if (!timer_container.dataset.claimed)
-            timer_container.innerHTML = moveTime;
-        }
-        // console.log("Active: ", activeImages);
-        timer_container.style.opacity = 1;
-      },
-      started !== -1 && images[started].timer < 9 ? 0 : 3000
-    );
+      console.log({
+        activeExist,
+        imagesExist,
+        idPlain,
+        active,
+      });
+      if (
+        activeExist === -1 &&
+        imagesExist !== -1 &&
+        idPlain &&
+        idPlain !== "" &&
+        !isMobile &&
+        active
+      ) {
+        activeImages.push(idPlain);
+        if (!timer_container.dataset.claimed)
+          timer_container.innerHTML = moveTime;
+      }
+      // console.log("Active: ", activeImages);
+      timer_container.style.opacity = 1;
+    }, 3000);
   }
 });
 
@@ -464,23 +448,59 @@ document.addEventListener("mouseout", (e) => {
   active = "";
 
   activeImages = activeImages.filter((e) => e !== idPlain);
-  const timer = document.getElementById(e.target.dataset.timer);
+  const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
     timer.innerHTML =
       timer.style.width === "max-content"
-        ? reward + (claimed ? "" : " Claim for $1")
+        ? newReward + (claimed ? "" : "Earn $1")
         : stopTime;
   }
-
-  // console.log("Active: ", activeImages);
 });
 
-document.addEventListener("click", (e) => {
+document.addEventListener("click", async (e) => {
   const id = e.target.id;
 
   const itemId = e.target.dataset.timer;
   const reward = e.target.dataset.reward;
+
+  if (id === "Kaalaa_auto_link") {
+    linkModal();
+    // modalDisplay()
+    return;
+  }
+
+  if (id === "modal-pair-button") {
+    let token = getElementById("pair_token_value");
+    if (!token) return;
+
+    const error = getElementById("modal-error-message");
+    error.innerHTML = "";
+    if (token.value !== "") {
+      const modalStatus = getElementById("modalStatusContainer");
+      let prev = "";
+      if (modalStatus) {
+        prev = modalStatus.innerHTML;
+        modalStatus.innerHTML = request_loader;
+      }
+
+      const req = await request("user/update", { notificationId: token });
+      if (req.status) {
+        // hideModal();
+        modalStatus.innerHTML =
+          '<p style="color:green; text-align: center">Pairing successfull.</p>';
+      } else {
+        modalStatus.innerHTML = prev;
+        const errorContainer = getElementById("modal-error-message");
+        if (errorContainer) {
+          errorContainer.innerHTML = req.message;
+        }
+      }
+    } else {
+      error.innerHTML = "Token value can't be empty.";
+    }
+    return;
+  }
 
   if (itemId && reward) {
     e.preventDefault();
@@ -491,10 +511,22 @@ document.addEventListener("click", (e) => {
 
   if (id === "claim_reward_button") {
     e.preventDefault();
-    request("reward/add", {
+    const modalStatus = getElementById("modalStatusContainer");
+    if (modalStatus) modalStatus.innerHTML = request_loader;
+
+    const req = request("reward/add", {
       ...current_reward,
       userId: getCookie("Kaalaa"),
     });
+
+    const timer = getElementById(obj?.itemId);
+    if (timer && data.status) {
+      if (data.status) {
+        timer.setAttribute("data-claimed", "yes");
+        timer.innerHTML = reward;
+      }
+    }
+    hideModal();
     return;
   }
 
@@ -507,7 +539,7 @@ document.addEventListener("click", (e) => {
 });
 
 function modalDisplay() {
-  const modal = document.getElementById("kaalaa_claim_modal");
+  const modal = getElementById("kaalaa_claim_modal");
 
   if (modal) modal.remove();
 
@@ -540,20 +572,90 @@ function modalDisplay() {
   modalDesc.className = "modal-desc";
 
   const modalbutton1 = document.createElement("button");
-  modalbutton1.innerHTML = "Get $1";
+  modalbutton1.innerHTML = "ACCEPT";
   modalbutton1.id = "claim_reward_button";
   modalbutton1.className = "modal-button";
 
-  const modalbutton2 = document.createElement("button");
-  modalbutton2.innerHTML = "Buy with earnings";
-  modalbutton2.className = "modal-button";
-  modalbutton2.style.backgroundColor = "black";
-  modalbutton2.style.color = "white";
+  // const modalbutton2 = document.createElement("button");
+  // modalbutton2.innerHTML = "Buy with earnings";
+  // modalbutton2.className = "modal-button";
+  // modalbutton2.style.backgroundColor = "black";
+  // modalbutton2.style.color = "white";
 
   const modalStatusWrapper = document.createElement("div");
   modalStatusWrapper.id = "modalStatusContainer";
+  modalStatusWrapper.className = "modal-status-container";
+  modalStatusWrapper.appendChild(modalbutton1);
+  // modalStatusWrapper.appendChild(modalbutton2);
+
+  modalContentWrapper.appendChild(closeRewardIcon);
+  modalContentWrapper.appendChild(modalRewardIcon);
+  modalContentWrapper.appendChild(modalTitle);
+  modalContentWrapper.appendChild(modalDesc);
+  modalContentWrapper.appendChild(modalStatusWrapper);
+  modalContainer.appendChild(modalContentWrapper);
+
+  document.body.appendChild(modalContainer);
+}
+
+function linkModal() {
+  const modal = document.getElementById("kaalaa_claim_modal");
+
+  if (modal) modal.remove();
+
+  const modalContainer = document.createElement("div");
+  modalContainer.className = "modal";
+  modalContainer.id = "kaalaa_claim_modal";
+  modalContainer.style.display = "flex";
+
+  const modalContentWrapper = document.createElement("div");
+  modalContentWrapper.className = "modal-content";
+
+  const modalRewardIcon = document.createElement("div");
+  modalRewardIcon.style.justifySelf = "center";
+  modalRewardIcon.innerHTML = rewardModal;
+
+  const closeRewardIcon = document.createElement("div");
+  closeRewardIcon.className = "modal-close";
+  closeRewardIcon.innerHTML = closeModal;
+
+  const loaderIcon = document.createElement("div");
+  loaderIcon.innerHTML = request_loader;
+
+  const modalTitle = document.createElement("h2");
+  modalTitle.style.fontSize = "18px";
+  modalTitle.innerHTML = "Pairing";
+  modalTitle.className = "modal-title";
+
+  const modalDesc = document.createElement("p");
+  modalDesc.innerHTML = "Input and pair token with the form below.";
+  modalDesc.className = "modal-desc";
+
+  const modalbutton1 = document.createElement("input");
+  modalbutton1.placeholder = "token";
+  modalbutton1.id = "pair_token_value";
+  modalbutton1.className = "modal-claim-input";
+  modalbutton1.style.fontWeight = "normal";
+  modalbutton1.style.textAlign = "left";
+
+  const modalbutton2 = document.createElement("button");
+  modalbutton2.innerHTML = "PAIR";
+  modalbutton2.className = "modal-button";
+  modalbutton2.id = "modal-pair-button";
+
+  const modalStatusWrapper = document.createElement("div");
+  modalStatusWrapper.id = "modalStatusContainer";
+  modalStatusWrapper.className = "modal-status-container";
   modalStatusWrapper.appendChild(modalbutton1);
   modalStatusWrapper.appendChild(modalbutton2);
+
+  const error = document.createElement("p");
+  error.style.fontSize = "14px";
+  error.style.color = "red";
+  error.style.textAlign = "center";
+  error.id = "modal-error-message";
+
+  modalStatusWrapper.appendChild(error);
 
   modalContentWrapper.appendChild(closeRewardIcon);
   modalContentWrapper.appendChild(modalRewardIcon);
@@ -566,10 +668,16 @@ function modalDisplay() {
 }
 
 function hideModal() {
-  const modal = document.getElementById("kaalaa_claim_modal");
+  const modal = getElementById("kaalaa_claim_modal");
   if (modal) modal.style.display = "none";
 }
 
 function splitGetIndex(id) {
   return id?.split("_")[0];
+}
+
+function getElementById(id) {
+  const element = document.getElementById(id);
+
+  return element ? element : false;
 }
