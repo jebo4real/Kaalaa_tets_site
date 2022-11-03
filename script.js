@@ -479,7 +479,7 @@ document.addEventListener("click", async (e) => {
     const modalStatus = getElementById("modalStatusContainer");
     if (modalStatus) modalStatus.innerHTML = request_loader;
 
-    const req = request("reward/add", {
+    const req = await nrequest("reward/add", {
       ...current_reward,
       userId: getCookie("Kaalaa"),
     });
