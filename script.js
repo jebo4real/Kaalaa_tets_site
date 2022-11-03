@@ -485,8 +485,8 @@ document.addEventListener("click", async (e) => {
     });
 
     const timer = getElementById(obj?.itemId);
-    if (timer && data.status) {
-      if (data.status) {
+    if (timer && req.status) {
+      if (req.status) {
         timer.setAttribute("data-claimed", "yes");
         timer.innerHTML = reward;
       }
