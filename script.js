@@ -210,10 +210,12 @@ function startTimer() {
 
         if (timer) {
           if (images[existImages].timer === 0) {
+            const active = img.data.matches(":hover");
+
             const claimed = timer.dataset.claimed;
             button ? (button.style.display = "flex") : null;
             timer.style.width = "max-content";
-            timer.style.opacity = 1;
+            if (active) timer.style.opacity = 1;
             timer.style.cursor = "pointer";
             timer.innerHTML = newReward + (claimed ? "" : " Earn $1");
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
@@ -311,7 +313,7 @@ async function createDownload() {
     "Kaalaa"
   )}`;
   downloadlink.target = "_blank";
-  downloadlink.className = "modal-button"
+  downloadlink.className = "modal-button";
   downloadlink.innerText = "Download App";
 
   const downloadlink2 = document.createElement("button");
@@ -325,7 +327,6 @@ async function createDownload() {
   newdiv.appendChild(downloadlink);
   newdiv.appendChild(downloadlink2);
 }
-
 
 window.onscroll = async function (e) {
   getAllImages();
@@ -386,48 +387,22 @@ function setCookie(name, value, daysToLive) {
 
 document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
-  // console.log("attribute: ", e.target.dataset.timer);
-  // id.attributes
   const idPlain = splitGetIndex(id);
-  // console.log(active, idPlain);
 
-  const timer_container = getElementById(e.target.dataset.timer);
+  console.log(id, idPlain);
 
-  // console.log("Plain: ", idPlain);
-  // console.log("Images: ", images);
-  // console.log("Sure: ", images[0].index);
+  if (e.target.className === "timer_container") {
+    e.target.style.opacity = 1;
+  }
+
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
-    if (started !== -1 && images[started].timer < 10) return;
-    setTimeout(() => {
-      const active = e.target.matches(":hover");
-      const imagesExist = images.findIndex(
-        (e) => e?.index?.toString() === idPlain
-      );
-      const activeExist = activeImages.findIndex((e) => e === idPlain);
-
-      console.log({
-        activeExist,
-        imagesExist,
-        idPlain,
-        active,
-      });
-      if (
-        activeExist === -1 &&
-        imagesExist !== -1 &&
-        idPlain &&
-        idPlain !== "" &&
-        !isMobile &&
-        active
-      ) {
-        activeImages.push(idPlain);
-        if (!timer_container.dataset.claimed)
-          timer_container.innerHTML = moveTime;
-      }
-      // console.log("Active: ", activeImages);
-      timer_container.style.opacity = 1;
-    }, 3000);
+    if (started !== -1 && images[started].timer < 10) onHover(e, idPlain);
+    else
+      setTimeout(() => {
+        onHover(e, idPlain);
+      }, 3000);
   }
 });
 
@@ -441,10 +416,10 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
-    timer.innerHTML =
-      timer.style.width === "max-content"
-        ? newReward + (claimed ? "" : "Earn $1")
-        : stopTime;
+    timer.style.opacity = 0;
+    // timer.style.width === "max-content"
+    //   ? newReward + (claimed ? "" : "Earn $1")
+    //   : stopTime;
   }
 });
 
@@ -527,6 +502,35 @@ document.addEventListener("click", async (e) => {
 
   if (id === "kaalaa_claim_modal") e.target.style.display = "none";
 });
+
+function onHover(e, idPlain) {
+  const timer_container = getElementById(e.target.dataset.timer);
+  const active = e.target.matches(":hover");
+  const imagesExist = images.findIndex((e) => e?.index?.toString() === idPlain);
+  const activeExist = activeImages.findIndex((e) => e === idPlain);
+
+  console.log("Claim: ", timer_container.dataset.claimed);
+
+  // console.log({
+  //   activeExist,
+  //   imagesExist,
+  //   idPlain,
+  //   active,
+  // });
+  if (
+    activeExist === -1 &&
+    imagesExist !== -1 &&
+    idPlain &&
+    idPlain !== "" &&
+    !isMobile &&
+    active
+  ) {
+    activeImages.push(idPlain);
+    // if (!timer_container.dataset.claimed) timer_container.innerHTML = moveTime;
+  }
+  // console.log("Active: ", activeImages);
+  if (active) timer_container.style.opacity = 1;
+}
 
 function modalDisplay() {
   const modal = getElementById("kaalaa_claim_modal");
