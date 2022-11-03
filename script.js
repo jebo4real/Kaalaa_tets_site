@@ -461,7 +461,7 @@ document.addEventListener("click", async (e) => {
       if (req.status) {
         // hideModal();
         modalStatus.innerHTML =
-          '<p style="color:green; text-align: center">Pairing successfull.</p>';
+          '<p style="color:green; text-align: center; width: 232px;">Pairing successfull.</p>';
       } else {
         modalStatus.innerHTML = prev;
         const errorContainer = getElementById("modal-error-message");
