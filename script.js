@@ -217,7 +217,7 @@ function startTimer() {
             timer.style.width = "max-content";
             if (active) timer.style.opacity = 1;
             timer.style.cursor = "pointer";
-            timer.innerHTML = newReward + (claimed ? "" : " Earn $1");
+            timer.innerHTML = newReward + (claimed ? "" : " Earn <span style='color: linear-gradient(270deg, #5200FF 0%, #8F00FF 100%);'>$1</span>");
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
             timer.setAttribute("data-reward", "yes");
           }
