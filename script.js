@@ -1,7 +1,7 @@
 console.log("KĀĀlĀĀ script initiated");
 
 const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
@@ -281,7 +281,6 @@ document.onreadystatechange = async () => {
     // console.log("Images: ", images);
     startTimer();
   }
-  createManualLink();
 };
 
 async function generateQRCode(data) {
@@ -312,8 +311,13 @@ async function createDownload() {
     "Kaalaa"
   )}`;
   downloadlink.target = "_blank";
-  downloadlink.className = "downloadQR";
+  downloadlink.className = "modal-button"
   downloadlink.innerText = "Download App";
+
+  const downloadlink2 = document.createElement("button");
+  downloadlink2.className = "modal-button";
+  downloadlink2.innerText = "Link device";
+  downloadlink2.id = "Kaalaa_auto_link";
 
   await generateQRCode(getCookie("Kaalaa"));
 
@@ -322,20 +326,9 @@ async function createDownload() {
   document.body.appendChild(newdiv2);
 
   newdiv2.appendChild(downloadlink);
+  newdiv2.appendChild(downloadlink2);
 }
 
-async function createManualLink() {
-  const downloadlink = document.createElement("button");
-  downloadlink.className = "modal-button";
-  downloadlink.innerText = "Link device";
-  downloadlink.id = "Kaalaa_auto_link";
-
-  const newdiv = document.createElement("div");
-  newdiv.style.padding = "20px";
-  document.body.appendChild(newdiv);
-
-  newdiv.appendChild(downloadlink);
-}
 
 window.onscroll = async function (e) {
   getAllImages();

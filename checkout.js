@@ -2,7 +2,7 @@ console.log("KĀĀlĀĀ checkout script initiated");
 
 let rewards = 0;
 const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
@@ -173,6 +173,7 @@ document.addEventListener("click", (e) => {
 
   if (id === "Kaalaa_redeem") {
     modalDisplay();
+    return
   }
   if (id === "modal-claim-button") {
     let amount = document.getElementById("claim_reward_value");
@@ -206,5 +207,11 @@ document.addEventListener("click", (e) => {
         if (modal) modal.remove();
       }
     }
+    return
   }
+  if (id === "kaalaa_claim_close") {
+    hideModal();
+    return;
+  }
+  if (id === "kaalaa_claim_modal") e.target.style.display = "none";
 });

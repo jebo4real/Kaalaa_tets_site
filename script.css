@@ -278,6 +278,12 @@
   margin-bottom: 8px;
 }
 
+#QRContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .product_wrapper {
     width: 100%;
