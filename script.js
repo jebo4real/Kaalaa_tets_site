@@ -191,6 +191,8 @@ function startTimer() {
             };
           }
         } else {
+          if(timer)timer.style.opacity = 1
+
           currImg[existImages] = {
             ...img,
             timer: img.timer === 0 ? 0 : img.timer - 1,
@@ -215,7 +217,11 @@ function startTimer() {
             const claimed = timer.dataset.claimed;
             button ? (button.style.display = "flex") : null;
             timer.style.width = "max-content";
-            if (active) timer.style.opacity = 1;
+            if(isMobile){
+              timer.style.opacity = 1;
+            }else{
+              if (active) timer.style.opacity = 1;
+            }
             timer.style.cursor = "pointer";
             timer.innerHTML =
               newReward +
@@ -228,7 +234,12 @@ function startTimer() {
         } else {
           createWrapper(img);
         }
+      }else{
+        if(isMobile){
+          if(timer)timer.style.opacity = 0
+        }
       }
+      
     });
   }, 1000);
 }
