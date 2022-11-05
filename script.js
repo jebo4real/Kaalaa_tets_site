@@ -443,6 +443,11 @@ document.addEventListener("click", async (e) => {
   const itemId = e.target.dataset.timer;
   const reward = e.target.dataset.reward;
 
+  if (e.target.tagName === "IMG") {
+    const timer = getElementById(e.target.dataset.timer);
+    if (timer) e.preventDefault();
+  }
+
   if (id === "Kaalaa_auto_link") {
     linkModal();
     // modalDisplay()
