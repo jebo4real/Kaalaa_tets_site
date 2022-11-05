@@ -191,7 +191,7 @@ function startTimer() {
             };
           }
         } else {
-          if(timer)timer.style.opacity = 1
+          if (timer) timer.style.opacity = 1;
 
           currImg[existImages] = {
             ...img,
@@ -217,9 +217,9 @@ function startTimer() {
             const claimed = timer.dataset.claimed;
             button ? (button.style.display = "flex") : null;
             timer.style.width = "max-content";
-            if(isMobile){
+            if (isMobile) {
               timer.style.opacity = 1;
-            }else{
+            } else {
               if (active) timer.style.opacity = 1;
             }
             timer.style.cursor = "pointer";
@@ -234,12 +234,11 @@ function startTimer() {
         } else {
           createWrapper(img);
         }
-      }else{
-        if(isMobile){
-          if(timer)timer.style.opacity = 0
+      } else {
+        if (isMobile) {
+          if (timer) timer.style.opacity = 0;
         }
       }
-      
     });
   }, 1000);
 }
@@ -454,7 +453,7 @@ document.addEventListener("click", async (e) => {
     let token = getElementById("pair_token_value");
     if (!token) return;
 
-    token = token.value
+    token = token.value;
     const error = getElementById("modal-error-message");
     error.innerHTML = "";
     if (token !== "") {
@@ -467,6 +466,7 @@ document.addEventListener("click", async (e) => {
 
       const req = await request("user/update", {
         notificationId: token,
+        deviceOS: "ios",
         userId: getCookie("Kaalaa"),
       });
       if (req.status) {
