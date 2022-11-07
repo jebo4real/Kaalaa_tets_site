@@ -287,6 +287,24 @@
   padding: 20px;
 }
 
+.zoom-in-out-box {
+  width: 64px;
+  height: 64px;
+  animation: zoom-in-zoom-out 0.7s ease infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(0.7, 0.7);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
 @media (max-width: 768px) {
   .product_wrapper {
     width: 100%;
