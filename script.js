@@ -257,7 +257,7 @@ function startTimer() {
 function timerHandler(existImages, img, format) {
   let currImg = [...images];
   const timer = img.timer === 0 ? 0 : format ? 10 : img.timer - 1;
-  if(existImages === 3)console.log("Timer: ", { format, timer });
+  // if(existImages === 3)console.log("Timer: ", { format, timer });
   currImg[existImages] = {
     ...img,
     timer,
@@ -426,7 +426,7 @@ document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
 
-  console.log(id, idPlain);
+  // console.log(id, idPlain);
 
   if (e.target.className === "timer_container") {
     e.target.style.opacity = 1;
@@ -434,7 +434,7 @@ document.addEventListener("mouseover", (e) => {
  
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
-    console.log("Started: ", started);
+    // console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) onHover(e, idPlain);
     else
       setTimeout(() => {
@@ -446,7 +446,7 @@ document.addEventListener("mouseover", (e) => {
 document.addEventListener("mouseout", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
-  console.log("Plain leave: ", idPlain);
+  // console.log("Plain leave: ", idPlain);
   active = "";
 
   activeImages = activeImages.filter((e) => e !== idPlain);
@@ -553,7 +553,7 @@ function onHover(e, idPlain) {
   const imagesExist = images.findIndex((e) => e?.index?.toString() === idPlain);
   const activeExist = activeImages.findIndex((e) => e === idPlain);
 
-  console.log("Claim: ", timer_container.dataset.claimed);
+  // console.log("Claim: ", timer_container.dataset.claimed);
 
   // console.log({
   //   activeExist,
