@@ -182,26 +182,19 @@ function startTimer() {
         (e) => e === img?.index?.toString()
       );
 
+      if(existImages !== -1)timerHandler(existImages, img, true)
       if (view && existImages !== -1) {
         let currImg = [...images];
         // console.log("Active: ", active)
         if (!isMobile) {
           if (active !== -1) {
-            currImg[existImages] = {
-              ...img,
-              timer: img.timer === 0 ? 0 : img.timer - 1,
-            };
+            timerHandler(existImages, img);
           }
         } else {
           if (timer) timer.style.opacity = 1;
 
-          currImg[existImages] = {
-            ...img,
-            timer: img.timer === 0 ? 0 : img.timer - 1,
-          };
+          timerHandler(existImages, img);
         }
-
-        images = currImg;
 
         if (currImg[existImages].timer - 1 === 0)
           request("track/add", {
@@ -218,31 +211,59 @@ function startTimer() {
 
             const claimed = timer.dataset.claimed;
             button ? (button.style.display = "flex") : null;
-            timer.style.width = "max-content";
+            // timer.style.width = "max-content";
             if (isMobile) {
               timer.style.opacity = 1;
             } else {
               if (active) timer.style.opacity = 1;
             }
+
             timer.style.cursor = "pointer";
-            timer.innerHTML =
-              newReward +
-              (claimed
-                ? ""
-                : " Earn <span style='color: linear-gradient(270deg, #5200FF 0%, #8F00FF 100%);'>$1</span>");
+            timer.style.whiteSpace = "nowrap";
+            if (!timer.dataset.reward) {
+              timer.innerHTML = newReward;
+              setTimeout(() => {
+                timer.style.width = "100px";
+                timer.innerHTML += claimed ? "" : " Earn $1";
+              }, 500);
+            }
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
             timer.setAttribute("data-reward", "yes");
+            // anime({
+            //   targets: timer,
+            //   width: "100px",
+            //   easing: "easeInQuad",
+            //   direction: "alternate",
+            //   loop: true,
+            //   duration: 0,
+            //   delay: 0,
+            // });
           }
         } else {
           createWrapper(img);
         }
       } else {
         if (isMobile) {
-          if (timer) timer.style.opacity = 0;
+          if (timer) {
+            timer.style.opacity = 0;
+          }
         }
       }
+      
     });
   }, 1000);
+}
+
+function timerHandler(existImages, img, format) {
+  let currImg = [...images];
+  const timer = img.timer === 0 ? 0 : format ? 10 : img.timer - 1;
+  if(existImages === 3)console.log("Timer: ", { format, timer });
+  currImg[existImages] = {
+    ...img,
+    timer,
+  };
+
+  images = currImg;
 }
 
 function addImage(img) {
@@ -410,7 +431,7 @@ document.addEventListener("mouseover", (e) => {
   if (e.target.className === "timer_container") {
     e.target.style.opacity = 1;
   }
-
+ 
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
@@ -418,14 +439,14 @@ document.addEventListener("mouseover", (e) => {
     else
       setTimeout(() => {
         onHover(e, idPlain);
-      }, 3000);
+      }, 2000);
   }
 });
 
 document.addEventListener("mouseout", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
-  // console.log("Plain leave: ", idPlain);
+  console.log("Plain leave: ", idPlain);
   active = "";
 
   activeImages = activeImages.filter((e) => e !== idPlain);
