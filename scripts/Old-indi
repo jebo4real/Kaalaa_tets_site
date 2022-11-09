@@ -184,14 +184,24 @@ function startTimer() {
 
       if (view && existImages !== -1) {
         let currImg = [...images];
+        // console.log("Active: ", active)
         if (!isMobile) {
           if (active !== -1) {
-            timerHandler()
+            currImg[existImages] = {
+              ...img,
+              timer: newtime,
+            };
           }
         } else {
-          timerHandler()
           if (timer) timer.style.opacity = 1;
+
+          currImg[existImages] = {
+            ...img,
+            timer: img.timer === 0 ? 0 : img.timer - 1,
+          };
         }
+
+        images = currImg;
 
         if (currImg[existImages].timer - 1 === 0)
           request("track/add", {
@@ -248,13 +258,14 @@ function startTimer() {
   }, 1000);
 }
 
-function timerHandler() {
+function timerHandler(existImages, img,) {
   let currImg = [...images];
-  const newl = [];
-  images.forEach((data) =>
-    newl.push({ ...data, timer: data.timer === 0 ? 0 : data.timer - 1 })
-  );
-  currImg = newl;
+  const timer = img.timer === 0 ? 0 : format ? 10 : img.timer - 1;
+  // if(existImages === 3)console.log("Timer: ", { format, timer });
+  currImg[existImages] = {
+    ...img,
+    timer,
+  };
 
   images = currImg;
 }

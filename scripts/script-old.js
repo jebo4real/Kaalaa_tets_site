@@ -182,15 +182,18 @@ function startTimer() {
         (e) => e === img?.index?.toString()
       );
 
+      if(existImages !== -1)timerHandler(existImages, img, true)
       if (view && existImages !== -1) {
         let currImg = [...images];
+        // console.log("Active: ", active)
         if (!isMobile) {
           if (active !== -1) {
-            timerHandler()
+            timerHandler(existImages, img);
           }
         } else {
-          timerHandler()
           if (timer) timer.style.opacity = 1;
+
+          timerHandler(existImages, img);
         }
 
         if (currImg[existImages].timer - 1 === 0)
@@ -241,20 +244,24 @@ function startTimer() {
         }
       } else {
         if (isMobile) {
-          if (timer) timer.style.opacity = 0;
+          if (timer) {
+            timer.style.opacity = 0;
+          }
         }
       }
+      
     });
   }, 1000);
 }
 
-function timerHandler() {
+function timerHandler(existImages, img, format) {
   let currImg = [...images];
-  const newl = [];
-  images.forEach((data) =>
-    newl.push({ ...data, timer: data.timer === 0 ? 0 : data.timer - 1 })
-  );
-  currImg = newl;
+  const timer = img.timer === 0 ? 0 : format ? 10 : img.timer - 1;
+  // if(existImages === 3)console.log("Timer: ", { format, timer });
+  currImg[existImages] = {
+    ...img,
+    timer,
+  };
 
   images = currImg;
 }
@@ -419,15 +426,15 @@ document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
 
-  console.log(id, idPlain);
+  // console.log(id, idPlain);
 
   if (e.target.className === "timer_container") {
     e.target.style.opacity = 1;
   }
-
+ 
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
-    console.log("Started: ", started);
+    // console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) onHover(e, idPlain);
     else
       setTimeout(() => {
@@ -546,7 +553,7 @@ function onHover(e, idPlain) {
   const imagesExist = images.findIndex((e) => e?.index?.toString() === idPlain);
   const activeExist = activeImages.findIndex((e) => e === idPlain);
 
-  console.log("Claim: ", timer_container.dataset.claimed);
+  // console.log("Claim: ", timer_container.dataset.claimed);
 
   // console.log({
   //   activeExist,
