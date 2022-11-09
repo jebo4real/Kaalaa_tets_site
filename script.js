@@ -237,7 +237,7 @@ function startTimer() {
             // });
           }
         } else {
-          createWrapper(img);
+          if (images[existArray].found === false) createWrapper(img);
         }
       } else {
         if (isMobile) {
@@ -248,7 +248,7 @@ function startTimer() {
   }, 1000);
 }
 
-function formatTimerToEarn (img){
+function formatTimerToEarn(img) {
   if (images[img.index].timer === 0) {
     const timer = getElementById(img.data.src + "-" + img.index);
     const active = img.data.matches(":hover");
@@ -298,7 +298,7 @@ function timerHandler() {
 }
 
 function addImage(img) {
-  const exist = existArray(img, images);
+  // const exist = existArray(img, images);
   // console.log("New image: ", images.some(e => e.data.src === img.src))
   if (!images.some((e) => e.data.src === img.src) && img.src) {
     const size = { width: img.width, height: img.height };
@@ -315,6 +315,12 @@ async function getAllImages() {
   await Array.prototype.map.call(document.images, function (i) {
     addImage(i);
   });
+
+  const request = await request("reward/review", {
+    userId: getCookie("Kaalaa"),
+    list: images,
+  });
+  if (request.status) images = request.data;
 }
 
 document.onreadystatechange = async () => {
@@ -469,8 +475,8 @@ document.addEventListener("mouseover", (e) => {
     if (started !== -1 && images[started].timer < 10) {
       console.log("Skid: ", true);
       onHover(e, idPlain);
-      if(images[started].timer === 0){
-        formatTimerToEarn(images[started])
+      if (images[started].timer === 0) {
+        formatTimerToEarn(images[started]);
       }
     } else
       setTimeout(() => {
