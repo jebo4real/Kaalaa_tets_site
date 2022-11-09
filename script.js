@@ -326,7 +326,7 @@ async function getAllImages() {
   let reviewlist = [];
   images.forEach(({ itemId, found }) => {
     if (found !== null || found !== undefined) {
-      reviewlist.push(itemId);
+      reviewlist.push({ itemId });
     }
   });
 
