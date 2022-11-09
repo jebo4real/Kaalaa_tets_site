@@ -237,7 +237,7 @@ function startTimer() {
             // });
           }
         } else {
-          if (images[existArray].found === false) createWrapper(img);
+          if (images[existImages].found !== true) createWrapper(img);
         }
       } else {
         if (isMobile) {
