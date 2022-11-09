@@ -316,11 +316,11 @@ async function getAllImages() {
     addImage(i);
   });
 
-  const request = await request("reward/review", {
+  const req = await request("reward/review", {
     userId: getCookie("Kaalaa"),
     list: images,
   });
-  if (request.status) images = request.data;
+  if (req.status) images = req.data;
 }
 
 document.onreadystatechange = async () => {
