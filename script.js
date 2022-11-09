@@ -457,7 +457,7 @@ document.addEventListener("click", async (e) => {
   const id = e.target.id;
 
   const itemId = e.target.dataset.timer;
-  const reward = e.target.dataset.reward;
+  const rewardClaim = e.target.dataset.reward;
 
   if (!e.target.href || e.target.href === "") e.preventDefault();
 
@@ -504,7 +504,7 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  if (itemId && reward) {
+  if (itemId && rewardClaim) {
     e.preventDefault();
     current_reward = { itemId, amount: 1 };
     modalDisplay();
