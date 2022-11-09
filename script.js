@@ -183,7 +183,7 @@ function startTimer() {
         (e) => e === img?.index?.toString()
       );
 
-      if (view && existImages !== -1) {
+      if (view && existImages !== -1 && img.found === false) {
         let currImg = [...images];
         if (!isMobile) {
           if (active !== -1) {
