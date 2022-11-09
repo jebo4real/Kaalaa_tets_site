@@ -186,10 +186,10 @@ function startTimer() {
         let currImg = [...images];
         if (!isMobile) {
           if (active !== -1) {
-            timerHandler()
+            timerHandler();
           }
         } else {
-          timerHandler()
+          timerHandler();
           if (timer) timer.style.opacity = 1;
         }
 
@@ -248,12 +248,50 @@ function startTimer() {
   }, 1000);
 }
 
+function formatTimerToEarn (img){
+  if (images[img.index].timer === 0) {
+    const timer = getElementById(img.data.src + "-" + img.index);
+    const active = img.data.matches(":hover");
+
+    const claimed = timer.dataset.claimed;
+    // timer.style.width = "max-content";
+    if (isMobile) {
+      timer.style.opacity = 1;
+    } else {
+      if (active) timer.style.opacity = 1;
+    }
+
+    timer.style.cursor = "pointer";
+    timer.style.whiteSpace = "nowrap";
+    if (!timer.dataset.reward) {
+      timer.innerHTML = newReward;
+      setTimeout(() => {
+        timer.style.width = "100px";
+        timer.innerHTML += claimed ? "" : " Earn $1";
+      }, 500);
+    }
+    timer.setAttribute("data-timer", img.data.src + "-" + img.index);
+    timer.setAttribute("data-reward", "yes");
+  }
+}
+
 function timerHandler() {
   let currImg = [...images];
   const newl = [];
-  images.forEach((data) =>
-    newl.push({ ...data, timer: data.timer === 0 ? 0 : data.timer - 1 })
-  );
+  images.forEach((data) => {
+    newl.push({ ...data, timer: data.timer === 0 ? 0 : data.timer - 1 });
+    // const currTime = data.timer - 1 === 0 ? true : false;
+    // if (currTime) {
+    //   const timer = getElementById(data.data.src + "-" + data.index);
+    //   const active = data.data.matches(":hover");
+    //   if (timer && !active) {
+    //     timer.style.cursor = "pointer";
+    //     timer.style.whiteSpace = "nowrap";
+    //     timer.style.width = "100px";
+    //     timer.innerHTML = newReward + " Earn $1";
+    //   }
+    // }
+  });
   currImg = newl;
 
   images = currImg;
@@ -428,8 +466,13 @@ document.addEventListener("mouseover", (e) => {
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
-    if (started !== -1 && images[started].timer < 10) onHover(e, idPlain);
-    else
+    if (started !== -1 && images[started].timer < 10) {
+      console.log("Skid: ", true);
+      onHover(e, idPlain);
+      if(images[started].timer === 0){
+        formatTimerToEarn(images[started])
+      }
+    } else
       setTimeout(() => {
         onHover(e, idPlain);
       }, 2000);
@@ -525,8 +568,10 @@ document.addEventListener("click", async (e) => {
     if (timer && req.status) {
       if (req.status) {
         timer.setAttribute("data-claimed", "yes");
-        timer.style.width = "min-content"
-        timer.innerHTML = newReward;
+        setTimeout(() => {
+          timer.style.width = "min-content";
+          timer.innerHTML = newReward;
+        }, 500);
       }
     }
     hideModal();
@@ -549,12 +594,6 @@ function onHover(e, idPlain) {
 
   console.log("Claim: ", timer_container.dataset.claimed);
 
-  // console.log({
-  //   activeExist,
-  //   imagesExist,
-  //   idPlain,
-  //   active,
-  // });
   if (
     activeExist === -1 &&
     imagesExist !== -1 &&
@@ -564,9 +603,7 @@ function onHover(e, idPlain) {
     active
   ) {
     activeImages.push(idPlain);
-    // if (!timer_container.dataset.claimed) timer_container.innerHTML = moveTime;
   }
-  // console.log("Active: ", activeImages);
   if (active) timer_container.style.opacity = 1;
 }
 
