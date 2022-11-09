@@ -6,6 +6,7 @@ const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
 };
+let loadingView = false;
 
 const isMobile =
   navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i);
@@ -306,7 +307,13 @@ function addImage(img) {
     if (img.height !== 180 && img.width !== 180)
       if (size.height >= 100 && size.width >= 100) {
         const index = images.length + 1;
-        images.push({ data: img, index, timer: 10, active: false });
+        images.push({
+          data: img,
+          index,
+          timer: 10,
+          active: false,
+          itemId: img.src + "-" + index,
+        });
       }
   }
 }
@@ -316,11 +323,29 @@ async function getAllImages() {
     addImage(i);
   });
 
-  const req = await request("reward/review", {
-    userId: getCookie("Kaalaa"),
-    list: images,
+  let reviewlist = [];
+  images.forEach(({ itemId, found }) => {
+    if (found !== null || found !== undefined) {
+      reviewlist.push(itemId);
+    }
   });
-  if (req.status) images = req.data;
+
+  if (!loadingView) {
+    loadingView = true;
+    const req = await request("reward/review", {
+      userId: getCookie("Kaalaa"),
+      list: reviewlist,
+    });
+    if (req.status) {
+      req.data.forEach(({ itemId, found }) => {
+        const exisit = images.findIndex((image) => image.itemId === itemId);
+        let current = [...images];
+        current[exisit] = { ...current[exisit], found };
+        images = current;
+      });
+    }
+    loadingView = false;
+  }
 }
 
 document.onreadystatechange = async () => {
