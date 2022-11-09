@@ -525,7 +525,8 @@ document.addEventListener("click", async (e) => {
     if (timer && req.status) {
       if (req.status) {
         timer.setAttribute("data-claimed", "yes");
-        timer.innerHTML = reward;
+        timer.style.width = "min-content"
+        timer.innerHTML = newReward;
       }
     }
     hideModal();
