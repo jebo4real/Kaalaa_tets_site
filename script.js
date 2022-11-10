@@ -581,14 +581,14 @@ document.addEventListener("click", async (e) => {
     const timer = getElementById(current_reward?.itemId);
     if (timer && req.status) {
       if (req.status) {
-        timer.setAttribute("data-claimed", "yes");
         const timers = document.getElementsByClassName("timer_container");
         if (timers.length > 0) {
           setTimeout(() => {
-            timers.forEach((timer) => {
-              timer.style.width = "min-content";
-              timer.innerHTML = newReward;
-            });
+            for (var i = 0; i < timers.length; i++) {
+              timers[i].setAttribute("data-claimed", "yes");
+              timers[i].style.width = "min-content";
+              timers[i].innerHTML = newReward;
+            }
           }, 500);
         }
       }
