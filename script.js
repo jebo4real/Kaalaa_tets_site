@@ -9,6 +9,7 @@ const auth = {
 const domain = window.location.hostname;
 
 let loadingView = false;
+let globalClaim = true;
 
 const isMobile =
   navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i);
@@ -324,6 +325,19 @@ async function getAllImages() {
   await Array.prototype.map.call(document.images, function (i) {
     addImage(i);
   });
+
+  if (globalClaim) {
+    const timers = document.getElementsByClassName("timer_container");
+    if (timers.length > 0) {
+      setTimeout(() => {
+        for (var i = 0; i < timers.length; i++) {
+          timers[i].setAttribute("data-claimed", "yes");
+          timers[i].style.width = "min-content";
+          timers[i].innerHTML = newReward;
+        }
+      }, 500);
+    }
+  }
 }
 
 document.onreadystatechange = async () => {
@@ -581,6 +595,7 @@ document.addEventListener("click", async (e) => {
     const timer = getElementById(current_reward?.itemId);
     if (timer && req.status) {
       if (req.status) {
+        globalClaim = true;
         const timers = document.getElementsByClassName("timer_container");
         if (timers.length > 0) {
           setTimeout(() => {
