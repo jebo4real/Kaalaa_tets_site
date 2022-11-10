@@ -9,7 +9,7 @@ const auth = {
 const domain = window.location.hostname;
 
 let loadingView = false;
-let globalClaim = true;
+let globalClaim = null;
 
 const isMobile =
   navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i);
