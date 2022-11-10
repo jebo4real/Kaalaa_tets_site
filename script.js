@@ -1,11 +1,13 @@
 console.log("KĀĀlĀĀ script initiated");
 
 const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
 };
+const domain = window.location.hostname;
+
 let loadingView = false;
 
 const isMobile =
@@ -183,7 +185,7 @@ function startTimer() {
         (e) => e === img?.index?.toString()
       );
 
-      if (view && existImages !== -1 && img.found === false) {
+      if (view && existImages !== -1) {
         let currImg = [...images];
         if (!isMobile) {
           if (active !== -1) {
@@ -194,11 +196,11 @@ function startTimer() {
           if (timer) timer.style.opacity = 1;
         }
 
-        if (currImg[existImages].timer - 1 === 0)
-          request("track/add", {
-            itemId: id,
-            userId: getCookie("Kaalaa"),
-          });
+        // if (currImg[existImages].timer - 1 === 0)
+        //   request("track/add", {
+        //     itemId: id,
+        //     userId: getCookie("Kaalaa"),
+        //   });
         // console.log(img.data.src + "-" + img.index, timer)
 
         const button = getElementById(img.index + "_product_button");
@@ -322,30 +324,6 @@ async function getAllImages() {
   await Array.prototype.map.call(document.images, function (i) {
     addImage(i);
   });
-
-  let reviewlist = [];
-  images.forEach(({ itemId, found }) => {
-    if (found !== null || found !== undefined) {
-      reviewlist.push({ itemId });
-    }
-  });
-
-  if (!loadingView) {
-    loadingView = true;
-    const req = await request("reward/review", {
-      userId: getCookie("Kaalaa"),
-      list: reviewlist,
-    });
-    if (req.status) {
-      req.data.forEach(({ itemId, found }) => {
-        const exisit = images.findIndex((image) => image.itemId === itemId);
-        let current = [...images];
-        current[exisit] = { ...current[exisit], found };
-        images = current;
-      });
-    }
-    loadingView = false;
-  }
 }
 
 document.onreadystatechange = async () => {
@@ -378,9 +356,14 @@ document.onreadystatechange = async () => {
       createDownload();
     }
 
-    getAllImages();
-    // console.log("Images: ", images);
-    startTimer();
+    const req = await request("reward/review", {
+      userId: getCookie("Kaalaa"),
+      itemId: domain,
+    });
+    if (req.status && req.found === false) {
+      getAllImages();
+      startTimer();
+    }
   }
 };
 
@@ -591,7 +574,7 @@ document.addEventListener("click", async (e) => {
     if (modalStatus) modalStatus.innerHTML = request_loader;
 
     const req = await request("reward/add", {
-      ...current_reward,
+      itemId: domain,
       userId: getCookie("Kaalaa"),
     });
 
@@ -599,10 +582,15 @@ document.addEventListener("click", async (e) => {
     if (timer && req.status) {
       if (req.status) {
         timer.setAttribute("data-claimed", "yes");
-        setTimeout(() => {
-          timer.style.width = "min-content";
-          timer.innerHTML = newReward;
-        }, 500);
+        const timers = document.getElementsByClassName("timer_container");
+        if (timers.length > 0) {
+          setTimeout(() => {
+            timers.forEach((timer) => {
+              timer.style.width = "min-content";
+              timer.innerHTML = newReward;
+            });
+          }, 500);
+        }
       }
     }
     hideModal();
