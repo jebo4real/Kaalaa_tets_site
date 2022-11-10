@@ -218,12 +218,8 @@ function startTimer() {
             } else {
               if (active) timer.style.opacity = 1;
             }
-
-            if (globalClaim) {
-              timer.style.width = "min-content"
-              timer.innerHTML = newReward;
-              return;
-            }
+            if (globalClaimCheck(timer)) return
+            
             timer.style.cursor = "pointer";
             timer.style.whiteSpace = "nowrap";
             if (!timer.dataset.reward) {
@@ -272,6 +268,7 @@ function formatTimerToEarn(img) {
 
     timer.style.cursor = "pointer";
     timer.style.whiteSpace = "nowrap";
+    if (globalClaimCheck(timer)) return
     if (!timer.dataset.reward) {
       timer.innerHTML = newReward;
       setTimeout(() => {
@@ -304,6 +301,15 @@ function timerHandler() {
   currImg = newl;
 
   images = currImg;
+}
+
+function globalClaimCheck(timer){
+  if (globalClaim) {
+    timer.style.width = "min-content"
+    timer.innerHTML = newReward;
+    return true;
+  }
+  return false
 }
 
 function addImage(img) {
