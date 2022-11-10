@@ -7,6 +7,7 @@ const auth = {
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
 };
 const domain = window.location.hostname;
+let claimed = null;
 
 let loadingView = false;
 
@@ -324,6 +325,19 @@ async function getAllImages() {
   await Array.prototype.map.call(document.images, function (i) {
     addImage(i);
   });
+
+  if (!claimed) {
+    const timers = document.getElementsByClassName("timer_container");
+    if (timers.length > 0) {
+      setTimeout(() => {
+        for (var i = 0; i < timers.length; i++) {
+          timers[i].setAttribute("data-claimed", "yes");
+          timers[i].style.width = "min-content";
+          timers[i].innerHTML = newReward;
+        }
+      }, 500);
+    }
+  }
 }
 
 document.onreadystatechange = async () => {
@@ -581,6 +595,7 @@ document.addEventListener("click", async (e) => {
     const timer = getElementById(current_reward?.itemId);
     if (timer && req.status) {
       if (req.status) {
+        claimed = true;
         const timers = document.getElementsByClassName("timer_container");
         if (timers.length > 0) {
           setTimeout(() => {
