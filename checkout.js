@@ -215,3 +215,8 @@ document.addEventListener("click", (e) => {
   }
   if (id === "kaalaa_claim_modal") e.target.style.display = "none";
 });
+
+function hideModal() {
+  const modal = getElementById("kaalaa_claim_modal");
+  if (modal) modal.style.display = "none";
+}
