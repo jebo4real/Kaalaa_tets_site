@@ -219,6 +219,11 @@ function startTimer() {
               if (active) timer.style.opacity = 1;
             }
 
+            if (globalClaim) {
+              timer.style.width = "min-content"
+              timer.innerHTML = newReward;
+              return;
+            }
             timer.style.cursor = "pointer";
             timer.style.whiteSpace = "nowrap";
             if (!timer.dataset.reward) {
