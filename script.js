@@ -355,6 +355,10 @@ document.onreadystatechange = async () => {
   // console.log("Platform Mobile: ", isMobile);
   if (document.readyState === "complete") {
     // getAllImages();
+    navigator.serviceWorker
+      .register("sw.js")
+      .then((e) => console.log("Service worker:", e))
+      .catch((e) => console.error("Service worker:",e));
     getMeta();
 
     let cookie = getCookie("Kaalaa");
