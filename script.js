@@ -401,29 +401,27 @@ document.onreadystatechange = async () => {
 window.addEventListener("beforeinstallprompt", (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
-  // // Stash the event so it can be triggered later.
+  // Stash the event so it can be triggered later.
   var deferredPrompt = e;
   console.log("Ready to install");
-  // // Update UI to notify the user they can add to home screen
-  deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
-  deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === "accepted") {
-      console.log("User accepted the A2HS prompt");
-    } else {
-      console.log("User dismissed the A2HS prompt");
-    }
-    deferredPrompt = null;
+  // Update UI to notify the user they can add to home screen
+  const addBtn = document.getElementById("install");
+
+  addBtn.addEventListener("click", (e) => {
+    // hide our user interface that shows our A2HS button
+    addBtn.style.display = "none";
+    // Show the prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the A2HS prompt");
+      } else {
+        console.log("User dismissed the A2HS prompt");
+      }
+      deferredPrompt = null;
+    });
   });
-
-  // const addBtn = document.getElementById("install");
-
-  // addBtn.addEventListener("click", (e) => {
-  //   // hide our user interface that shows our A2HS button
-  //   addBtn.style.display = "none";
-  //   // Show the prompt
-
-  // });
 });
 
 async function generateQRCode(data) {
@@ -472,7 +470,7 @@ async function createDownload() {
 
   newdiv.appendChild(downloadlink);
   newdiv.appendChild(downloadlink2);
-  // newdiv.appendChild(Installlink);
+  newdiv.appendChild(Installlink);
 }
 
 window.onscroll = async function (e) {
