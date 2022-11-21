@@ -697,10 +697,11 @@ function onHover(e, idPlain) {
   }
   if (active) {
     timer_container.style.opacity = 1;
-    timer_container.innerHTML = kaalaaTimerHandler("kaalaa_max_timer");
-    setTimeout(() => {
-      timer_container.innerHTML = kaalaaTimerHandler("zoom-in-out-box");
-    }, 1000);
+    if (images[imagesExist].timer !== 0) {
+      timer_container.innerHTML = kaalaaTimerHandler(
+        "kaalaa_max_timer zoom-in-out-box"
+      );
+    }
   }
 }
 
