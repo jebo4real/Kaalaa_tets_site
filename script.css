@@ -65,7 +65,7 @@
 }
 
 .timer_container {
-  transition: 0.2s;
+  transition: 0.5s;
   display: flex;
   opacity: 0;
   justify-content: center;
@@ -294,7 +294,7 @@
 }
 
 .kaalaa_max_timer {
-  animation: kaalaa_scale_in 0.3s ease-in 0s 1;
+  animation: kaalaa_scale_in 0.7s ease-in 0s 1;
 }
 
 @-webkit-keyframes kaalaa_scale_in {
