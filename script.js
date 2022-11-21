@@ -22,18 +22,25 @@ const stopTime = `<svg width="20" height="20" viewBox="0 0 16 16" fill="none" xm
 <path d="M8 5V8" stroke="white" stroke-linecap="round"/>
 </svg>
 `;
-const moveTime = `<svg xmlns:svg="http://www.w3.org/2000/svg" 
-xmlns="http://www.w3.org/2000/svg" 
-xmlns:xlink="http://www.w3.org/1999/xlink"
-version="1.0" width="64px" height="64px" 
-viewBox="0 0 128 128" xml:space="preserve" class="zoom-in-out-box">
-<rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
-<g>
-<path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#FFFFFF"/>
-<path d="M58.25 5h11.3v59h-11.3V5z" fill="#FFFFFF"/>
-<animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2880ms" repeatCount="indefinite"/>
-</g>
-</svg>`;
+const moveTime =
+  // `<svg xmlns:svg="http://www.w3.org/2000/svg"
+  // xmlns="http://www.w3.org/2000/svg"
+  // xmlns:xlink="http://www.w3.org/1999/xlink"
+  // version="1.0" width="64px" height="64px"
+  // viewBox="0 0 128 128" xml:space="preserve" class="zoom-in-out-box">
+  // <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
+  // <g>
+  // <path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#FFFFFF"/>
+  // <path d="M58.25 5h11.3v59h-11.3V5z" fill="#FFFFFF"/>
+  // <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2880ms" repeatCount="indefinite"/>
+  // </g>
+  // </svg>`;
+  `<div class="pulse">
+<div class="spin">
+    <div class="icon"></div>
+</div>
+</div>`;
+
 const reward = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="10" cy="8" r="2.5" stroke="black"/>
 <path d="M10.5248 1.81414C10.2332 1.52854 9.76679 1.52854 9.4752 1.81414L8.02577 3.23379L5.99702 3.25485C5.5889 3.25908 5.25908 3.5889 5.25485 3.99702L5.23379 6.02577L3.81414 7.4752C3.52854 7.76679 3.52854 8.23321 3.81414 8.5248L5.23379 9.97423L5.25485 12.003C5.25908 12.4111 5.5889 12.7409 5.99702 12.7452L8.02577 12.7662L9.4752 14.1859C9.76679 14.4715 10.2332 14.4715 10.5248 14.1859L11.9742 12.7662L14.003 12.7452C14.4111 12.7409 14.7409 12.4111 14.7452 12.003L14.7662 9.97423L16.1859 8.5248C16.4715 8.23321 16.4715 7.76679 16.1859 7.4752L14.7662 6.02577L14.7452 3.99702C14.7409 3.5889 14.4111 3.25908 14.003 3.25485L11.9742 3.23379L10.5248 1.81414Z" stroke="black" stroke-linejoin="round"/>
@@ -409,7 +416,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
   addBtn.addEventListener("click", (e) => {
     // hide our user interface that shows our A2HS button
-    
+
     // Show the prompt
     deferredPrompt.prompt();
     // Wait for the user to respond to the prompt

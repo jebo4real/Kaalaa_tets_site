@@ -1,3 +1,130 @@
+:root {
+  --purple-light: #eee3ff;
+  --purple: #6100ff;
+  --purple-hover: #7f00ff;
+  --light: #ffffff;
+
+  /* Base Sizes */
+  --bg-size: 28px;
+  --icon-size: 16px;
+  --full-width: 77px;
+  --border-radius: calc(var(--bg-size) / 2);
+
+  /* Easings */
+  --ease-bounce: cubic-bezier(0.22, 1, 0.36, 1.05);
+
+  /* Durations */
+  --norm-dur: 0.3s;
+  --slow-dur: 0.5s;
+  --very-slow-dur: 1s;
+
+  /* Delays */
+  --norm-delay: 0.2s;
+  --long-delay: 0.5s;
+  --calc-delay-for-go-to-full-width-anim: calc(
+    var(--pulse-anim-duration) + var(--long-delay)
+  );
+
+  /* Multiplier for presentation. Makes it look bigger */
+  --multiplier: 4;
+
+  /* Number of cycles for the timer */
+  --number-of-pulse-iterations: 4;
+
+  /* Calculated vars with the multiplier */
+  --pulse-anim-duration: calc(var(--number-of-pulse-iterations) * 1s);
+  --calc-border-radius: calc(var(--border-radius) * var(--multiplier));
+  --calc-bg-size: calc(var(--bg-size) * var(--multiplier));
+  --calc-full-width: calc(var(--full-width) * var(--multiplier));
+
+  /* Animations */
+  --pulse-anim: pulse ease-out var(--very-slow-dur) var(--long-delay)
+    var(--number-of-pulse-iterations);
+  --spin-anim: spin linear var(--pulse-anim-duration) var(--long-delay) forwards;
+  --go-to-full-width-anim: goToFullSize var(--ease-bounce) var(--slow-dur)
+    var(--calc-delay-for-go-to-full-width-anim) forwards;
+  --show-bg-anim: showElement var(--ease-bounce) var(--slow-dur) forwards;
+}
+
+.icon {
+  width: calc(var(--icon-size) * var(--multiplier));
+  height: calc(var(--icon-size) * var(--multiplier));
+  background-image: url("kaalaa_assets/timer.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-left: calc(
+    ((var(--bg-size) - var(--icon-size)) / 2) * var(--multiplier)
+  );
+  margin-top: calc(
+    ((var(--bg-size) - var(--icon-size)) / 2) * var(--multiplier)
+  );
+  position: absolute;
+  pointer-events: none;
+  transform: scale(0);
+  animation: showElement ease-in 0.3s 0.2s forwards;
+}
+
+.kaalaa_pulse {
+  position: absolute;
+  width: var(--calc-bg-size);
+  height: var(--calc-bg-size);
+  animation: var(--pulse-anim);
+  pointer-events: none;
+}
+
+.kaalaa_spin {
+  position: absolute;
+  width: var(--calc-bg-size);
+  height: var(--calc-bg-size);
+  animation: var(--spin-anim);
+  pointer-events: none;
+}
+
+@keyframes kaalaa_showElement {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes kaalaa_goToFullSize {
+  from {
+    margin-left: 0;
+    width: var(--calc-bg-size);
+  }
+  to {
+    margin-left: calc(
+      var(--calc-full-width) / -2 + calc(var(--calc-bg-size) / 2)
+    );
+    width: var(--calc-full-width);
+  }
+}
+
+@keyframes kaalaa_pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes kaalaa_spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .product_wrapper {
   position: relative;
   /* padding: 24px; */
@@ -192,7 +319,7 @@
   border-radius: 32px;
 }
 
-.modal-status-container{
+.modal-status-container {
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -278,7 +405,7 @@
   margin-bottom: 8px;
 }
 
-#QRContainer{
+#QRContainer {
   width: min-content;
   display: flex;
   flex-direction: column;
