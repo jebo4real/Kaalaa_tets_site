@@ -152,7 +152,7 @@ function createWrapper(img) {
   timerWrapper.className = "timer_container";
   timerWrapper.id = img.data.src + "-" + img.index;
 
-  timerWrapper.innerHTML = moveTime;
+  timerWrapper.appendChild(moveTime);
 
   let image = new Image(img.data.width, img.data.height);
   image.src = img.data.src;
