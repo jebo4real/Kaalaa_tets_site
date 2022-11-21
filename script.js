@@ -22,20 +22,7 @@ const stopTime = `<svg width="20" height="20" viewBox="0 0 16 16" fill="none" xm
 <path d="M8 5V8" stroke="white" stroke-linecap="round"/>
 </svg>
 `;
-const moveTime =
-  // `<svg xmlns:svg="http://www.w3.org/2000/svg"
-  // xmlns="http://www.w3.org/2000/svg"
-  // xmlns:xlink="http://www.w3.org/1999/xlink"
-  // version="1.0" width="64px" height="64px"
-  // viewBox="0 0 128 128" xml:space="preserve" class="zoom-in-out-box">
-  // <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
-  // <g>
-  // <path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#FFFFFF"/>
-  // <path d="M58.25 5h11.3v59h-11.3V5z" fill="#FFFFFF"/>
-  // <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2880ms" repeatCount="indefinite"/>
-  // </g>
-  // </svg>`;
-  `<div class="pulse">
+const moveTime = `<div class="pulse">
 <div class="spin">
     <div class="icon"></div>
 </div>
