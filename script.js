@@ -22,11 +22,13 @@ const stopTime = `<svg width="20" height="20" viewBox="0 0 16 16" fill="none" xm
 <path d="M8 5V8" stroke="white" stroke-linecap="round"/>
 </svg>
 `;
-const moveTime = `<div class="pulse">
-<div class="spin">
-    <div class="icon"></div>
-</div>
-</div>`;
+const moveTime = (
+  <div class="pulse">
+    <div class="spin">
+      <div class="icon"></div>
+    </div>
+  </div>
+);
 
 const reward = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="10" cy="8" r="2.5" stroke="black"/>
