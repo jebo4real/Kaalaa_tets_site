@@ -699,7 +699,7 @@ function onHover(e, idPlain) {
     timer_container.style.opacity = 1;
     if (images[imagesExist].timer !== 0) {
       timer_container.style.transform = "scale(0), scale(1)";
-      timer_container.style.transitionDelay = "0.2s"
+      timer_container.style.transitionDelay = "5s"
       timer_container.innerHTML = kaalaaTimerHandler(
         "kaalaa_max_timer zoom-in-out-box"
       );
