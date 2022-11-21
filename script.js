@@ -80,7 +80,7 @@ function kaalaaTimerHandler(name) {
   <g>
   <path d="M63.88 0A63.88 63.88 0 1 1 0 63.88 63.88 63.88 0 0 1 63.88 0zm0 11.88a52 52 0 1 1-52 52 52 52 0 0 1 52-52zm0 46.2a5.8 5.8 0 1 1-5.8 5.8 5.8 5.8 0 0 1 5.8-5.8z" fill-rule="evenodd" fill="#FFFFFF"/>
   <path d="M58.25 5h11.3v59h-11.3V5z" fill="#FFFFFF"/>
-  <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2880ms" repeatCount="indefinite"/>
+  <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="5s" repeatCount="indefinite"/>
   </g>
   </svg>`;
 }
@@ -695,7 +695,13 @@ function onHover(e, idPlain) {
   ) {
     activeImages.push(idPlain);
   }
-  if (active) timer_container.style.opacity = 1;
+  if (active) {
+    timer_container.style.opacity = 1;
+    timer_container.innerHTML = kaalaaTimerHandler("kaalaa_max_timer");
+    setTimeout(() => {
+      timer_container.innerHTML = kaalaaTimerHandler("zoom-in-out-box");
+    }, 1000);
+  }
 }
 
 function modalDisplay() {
