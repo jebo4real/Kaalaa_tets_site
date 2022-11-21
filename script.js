@@ -698,7 +698,9 @@ function onHover(e, idPlain) {
   if (active) {
     timer_container.style.opacity = 1;
     if (images[imagesExist].timer !== 0) {
-      timer_container.className = "timer_container kaalaa_animate_timer_container";
+      timer_container.className = "timer_container";
+      timer_container.className =
+        "timer_container kaalaa_animate_timer_container";
       timer_container.innerHTML = kaalaaTimerHandler(
         "kaalaa_max_timer zoom-in-out-box"
       );
