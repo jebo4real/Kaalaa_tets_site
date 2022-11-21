@@ -65,7 +65,7 @@
 }
 
 .timer_container {
-  transition: 0.5s;
+  transition: 0.2s;
   display: flex;
   opacity: 0;
   justify-content: center;
