@@ -92,6 +92,7 @@
       rgba(255, 255, 255, 0.5)
     ),
     linear-gradient(270deg, #8000ff 0%, #6100ff 100%);
+    opacity: 1;
 }
 
 .timer_container_w {
