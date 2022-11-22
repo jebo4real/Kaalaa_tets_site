@@ -543,17 +543,11 @@ document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
 
-  console.log(id, idPlain);
-
-  if (e.target.classList.contains("timer_container")) {
-    e.target.style.opacity = 1;
-  }
-
   if (id.includes("_")) {
+    e.target.style.opacity = 1;
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) {
-      console.log("Skid: ", true);
       onHover(e, idPlain);
       if (images[started].timer === 0) {
         formatTimerToEarn(images[started]);
