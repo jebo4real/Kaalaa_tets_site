@@ -544,12 +544,10 @@ document.addEventListener("mouseover", (e) => {
   const idPlain = splitGetIndex(id);
 
   if (id.includes("_")) {
-    const timer_container = getElementById(e.target.dataset.timer);
-    if (timer_container) timer_container.style.opacity = 1;
-
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) {
+      console.log("Skid: ", true);
       onHover(e, idPlain);
       if (images[started].timer === 0) {
         formatTimerToEarn(images[started]);
@@ -571,8 +569,10 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
-    timer.className = "timer_container";
     timer.style.opacity = 0;
+    // timer.style.width === "max-content"
+    //   ? newReward + (claimed ? "" : "Earn $1")
+    //   : stopTime;
   }
 });
 
@@ -691,6 +691,7 @@ function onHover(e, idPlain) {
     activeImages.push(idPlain);
   }
   if (active) {
+    timer_container.style.opacity = 1;
     if (images[imagesExist].timer !== 0) {
       timer_container.className =
         "timer_container kaalaa_animate_timer_container";
