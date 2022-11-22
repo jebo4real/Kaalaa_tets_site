@@ -569,6 +569,8 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
+    if (timer.classList.contains("kaalaa_animate_timer_container"))
+      timer_container.classList.remove("kaalaa_animate_timer_container");
     timer.style.opacity = 0;
     // timer.style.width === "max-content"
     //   ? newReward + (claimed ? "" : "Earn $1")
@@ -693,8 +695,9 @@ function onHover(e, idPlain) {
   if (active) {
     timer_container.style.opacity = 1;
     if (images[imagesExist].timer !== 0) {
-      timer_container.className =
-        "timer_container kaalaa_animate_timer_container";
+      if (!timer_container.classList.contains("kaalaa_animate_timer_container"))
+        timer_container.classList.add("kaalaa_animate_timer_container");
+
       timer_container.innerHTML = kaalaaTimerHandler(
         "kaalaa_max_timer zoom-in-out-box"
       );
