@@ -143,6 +143,7 @@ function createWrapper(img) {
 
   let timerWrapper = document.createElement("div");
   timerWrapper.className = "timer_container";
+  timerWrapper.style.opacity = 0
   timerWrapper.id = img.data.src + "-" + img.index;
 
   timerWrapper.innerHTML = kaalaaTimerHandler(moveTime);
