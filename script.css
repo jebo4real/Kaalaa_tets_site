@@ -298,6 +298,7 @@
 }
 
 .kaalaa_animate_timer_container {
+  opacity: 1 !important;
   animation: kaalaa_scale_in 0.5s ease-in 0s 1;
 }
 
