@@ -544,7 +544,9 @@ document.addEventListener("mouseover", (e) => {
   const idPlain = splitGetIndex(id);
 
   if (id.includes("_")) {
-    e.target.style.opacity = 1;
+    const timer_container = getElementById(e.target.dataset.timer);
+    if (timer_container) timer_container.style.opacity = 1;
+
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) {
@@ -569,7 +571,7 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
-    timer.className = "timer_container"
+    timer.className = "timer_container";
     timer.style.opacity = 0;
   }
 });
