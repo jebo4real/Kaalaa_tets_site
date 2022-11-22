@@ -567,7 +567,7 @@ document.addEventListener("mouseout", (e) => {
 
   activeImages = activeImages.filter((e) => e !== idPlain);
   const timer = getElementById(e.target.dataset.timer);
-  if (timer) {
+  if (timer && !e.target.classList.contains("timer_container")) {
     const claimed = timer.dataset.claimed;
     timer.style.opacity = 0;
     if (timer.classList.contains("kaalaa_animate_timer_container"))
