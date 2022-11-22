@@ -569,9 +569,9 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
-    if (timer.classList.contains("kaalaa_animate_timer_container"))
-      timer_container.classList.remove("kaalaa_animate_timer_container");
     timer.style.opacity = 0;
+    if (timer.classList.contains("kaalaa_animate_timer_container"))
+      timer.classList.remove("kaalaa_animate_timer_container");
     // timer.style.width === "max-content"
     //   ? newReward + (claimed ? "" : "Earn $1")
     //   : stopTime;
