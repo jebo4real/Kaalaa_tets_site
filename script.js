@@ -542,6 +542,10 @@ function setCookie(name, value, daysToLive) {
 document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
+  const container = getElementById("timer_container");
+
+  if (container.classList.contains("timer_container"))
+    container.style.opacity = 1;
 
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
