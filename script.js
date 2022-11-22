@@ -544,7 +544,7 @@ document.addEventListener("mouseover", (e) => {
   const idPlain = splitGetIndex(id);
   const container = getElementById("timer_container");
 
-  if (container.classList.contains("timer_container"))
+  if (container && container.classList.contains("timer_container"))
     container.style.opacity = 1;
 
   if (id.includes("_")) {
