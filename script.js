@@ -143,7 +143,7 @@ function createWrapper(img) {
 
   let timerWrapper = document.createElement("div");
   timerWrapper.className = "timer_container";
-  timerWrapper.style.opacity = 0
+  timerWrapper.style.opacity = 0;
   timerWrapper.id = img.data.src + "-" + img.index;
 
   timerWrapper.innerHTML = kaalaaTimerHandler(moveTime);
@@ -575,10 +575,8 @@ document.addEventListener("mouseout", (e) => {
   const timer = getElementById(e.target.dataset.timer);
   if (timer) {
     const claimed = timer.dataset.claimed;
+    timer.className = "timer_container"
     timer.style.opacity = 0;
-    // timer.style.width === "max-content"
-    //   ? newReward + (claimed ? "" : "Earn $1")
-    //   : stopTime;
   }
 });
 
@@ -697,9 +695,7 @@ function onHover(e, idPlain) {
     activeImages.push(idPlain);
   }
   if (active) {
-    timer_container.style.opacity = 1;
     if (images[imagesExist].timer !== 0) {
-      timer_container.className = "timer_container";
       timer_container.className =
         "timer_container kaalaa_animate_timer_container";
       timer_container.innerHTML = kaalaaTimerHandler(
