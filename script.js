@@ -545,7 +545,7 @@ document.addEventListener("mouseover", (e) => {
 
   console.log(id, idPlain);
 
-  if (e.target.className === "timer_container") {
+  if (e.target.classList.contains("timer_container")) {
     e.target.style.opacity = 1;
   }
 
