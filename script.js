@@ -382,10 +382,10 @@ document.onreadystatechange = async () => {
             const res = await request("user", data);
             // console.log("Token: ", res)
             if (res.status) {
-              window.open(req.passUrl, "_blank").focus();
               setCookie("Kaalaa", res?.token, 1);
               localStorage.setItem("Kaalaa", res?.token);
               createDownload();
+              window.open(res?.passUrl, "_blank").focus();
             }
           })
           .catch((e) => console.error(e));
