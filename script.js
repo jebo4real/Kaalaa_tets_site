@@ -405,16 +405,16 @@ document.onreadystatechange = async () => {
       getAllImages();
       startTimer();
     }
-    getPassUrl()
+    getPassUrl();
   }
 };
 
-async function getPassUrl(){
-  const res = await request("user/get", {userId: getCookie("Kaalaa")});
-  if(res.status){
-    passUrl = res.data.passUrl
-    const wallet = getElementById("install")
-    if(wallet) wallet.style.display = "block"
+async function getPassUrl() {
+  const res = await request("user/get", { userId: getCookie("Kaalaa") });
+  if (res.status) {
+    passUrl = "https://pub1.pskt.io/" + res.data.passId;
+    const wallet = getElementById("install");
+    if (wallet) wallet.style.display = "block";
   }
 }
 
@@ -489,7 +489,7 @@ async function createDownload() {
   const Installlink = document.createElement("button");
   Installlink.className = "modal-button";
   Installlink.id = "install";
-  Installlink.style.display = "none"
+  Installlink.style.display = "none";
   Installlink.innerText = "Download wallet";
 
   await generateQRCode(getCookie("Kaalaa"));
