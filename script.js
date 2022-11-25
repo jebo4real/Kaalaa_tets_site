@@ -405,8 +405,18 @@ document.onreadystatechange = async () => {
       getAllImages();
       startTimer();
     }
+    getPassUrl()
   }
 };
+
+async function getPassUrl(){
+  const res = await request("user/get", {userId: getCookie("Kaalaa")});
+  if(res.status){
+    passUrl = res.data.passUrl
+    const wallet = getElementById("install")
+    if(wallet) wallet.style.display = "block"
+  }
+}
 
 // window.addEventListener("beforeinstallprompt", (e) => {
 //   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -479,6 +489,7 @@ async function createDownload() {
   const Installlink = document.createElement("button");
   Installlink.className = "modal-button";
   Installlink.id = "install";
+  Installlink.style.display = "none"
   Installlink.innerText = "Download wallet";
 
   await generateQRCode(getCookie("Kaalaa"));
