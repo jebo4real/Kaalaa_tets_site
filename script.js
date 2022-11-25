@@ -412,7 +412,7 @@ document.onreadystatechange = async () => {
 async function getPassUrl() {
   const res = await request("user/get", { userId: getCookie("Kaalaa") });
   if (res.status) {
-    passUrl = "https://pub1.pskt.io/" + res.data.passId;
+    passUrl = "https://pub1.pskt.io/" + res.data[0].passId;
     const wallet = getElementById("install");
     if (wallet) wallet.style.display = "block";
   }
