@@ -387,6 +387,8 @@ document.onreadystatechange = async () => {
               localStorage.setItem("Kaalaa", res?.token);
               createDownload();
               passUrl = res?.passUrl;
+              const wallet = getElementById("install");
+              if (wallet) wallet.style.display = "block";
             }
           })
           .catch((e) => console.error(e));
