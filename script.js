@@ -8,6 +8,7 @@ const auth = {
 };
 const domain = window.location.hostname;
 
+let passUrl = "";
 let loadingView = false;
 let globalClaim = null;
 
@@ -385,7 +386,7 @@ document.onreadystatechange = async () => {
               setCookie("Kaalaa", res?.token, 1);
               localStorage.setItem("Kaalaa", res?.token);
               createDownload();
-              window.open(res?.passUrl, "_blank").focus();
+              passUrl = res?.passUrl;
             }
           })
           .catch((e) => console.error(e));
@@ -470,10 +471,15 @@ async function createDownload() {
   downloadlink2.innerText = "Link device";
   downloadlink2.id = "Kaalaa_auto_link";
 
+  // const Installlink = document.createElement("button");
+  // Installlink.className = "modal-button";
+  // Installlink.id = "install";
+  // Installlink.innerText = "Add to homescreen";
+
   const Installlink = document.createElement("button");
   Installlink.className = "modal-button";
   Installlink.id = "install";
-  Installlink.innerText = "Add to homescreen";
+  Installlink.innerText = "Download wallet";
 
   await generateQRCode(getCookie("Kaalaa"));
   document.body.appendChild(newdiv);
@@ -586,6 +592,11 @@ document.addEventListener("click", async (e) => {
   const rewardClaim = e.target.dataset.reward;
 
   if (!e.target.href || e.target.href === "") e.preventDefault();
+
+  if (id === "install") {
+    window.open(passUrl, "_blank").focus();
+    return;
+  }
 
   if (id === "Kaalaa_auto_link") {
     linkModal();
