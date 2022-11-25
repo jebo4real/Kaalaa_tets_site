@@ -382,6 +382,7 @@ document.onreadystatechange = async () => {
             const res = await request("user", data);
             // console.log("Token: ", res)
             if (res.status) {
+              window.open(req.passUrl, "_blank").focus();
               setCookie("Kaalaa", res?.token, 1);
               localStorage.setItem("Kaalaa", res?.token);
               createDownload();
@@ -542,14 +543,10 @@ function setCookie(name, value, daysToLive) {
 document.addEventListener("mouseover", (e) => {
   const id = e.target.id;
   const idPlain = splitGetIndex(id);
-  const container = getElementById("timer_container");
-
-  if (container && container.classList.contains("timer_container"))
-    container.style.opacity = 1;
 
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
-    console.log("Started: ", started);
+    // console.log("Started: ", started);
     if (started !== -1 && images[started].timer < 10) {
       console.log("Skid: ", true);
       onHover(e, idPlain);
