@@ -690,7 +690,7 @@ document.addEventListener("click", async (e) => {
         }
 
         var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(data);
+        a.href = window.URL.createObjectURL(req.file);
         a.download = getCookie("Kaalaa");
         a.click();
       }
