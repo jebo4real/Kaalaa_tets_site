@@ -691,7 +691,7 @@ document.addEventListener("click", async (e) => {
 
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(req.file);
-        a.download = getCookie("Kaalaa");
+        a.download = `${getCookie("Kaalaa")}.pkpass`;
         a.click();
       }
     }
