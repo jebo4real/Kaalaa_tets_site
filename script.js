@@ -108,10 +108,9 @@ async function request(url, obj) {
       body: JSON?.stringify(obj),
     });
 
-    const data =
-      (await url) === "reward/add"
-        ? { file: response.blob(), status: true }
-        : response.json();
+    const data = await (url === "reward/add"
+      ? { file: response.blob(), status: true }
+      : response.json());
 
     return data;
   } catch (e) {
