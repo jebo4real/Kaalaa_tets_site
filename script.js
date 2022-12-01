@@ -108,9 +108,7 @@ async function request(url, obj) {
       body: JSON?.stringify(obj),
     });
 
-    const data = await (url === "reward/add"
-      ? { file: response.blob(), status: true }
-      : response.json());
+    const data = await response.json();
 
     return data;
   } catch (e) {
@@ -689,10 +687,17 @@ document.addEventListener("click", async (e) => {
           }, 500);
         }
 
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(req.file);
-        a.download = `${getCookie("Kaalaa")}.pkpass`;
-        a.click();
+        try {
+          const blob = await new Blob([new Uint8Array(req.data.buffer.data)], {
+            type: req.data.type,
+          });
+          var a = document.createElement("a");
+          a.href = window.URL.createObjectURL(blob);
+          a.download = `${getCookie("Kaalaa")}.pkpass`;
+          a.click();
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
     hideModal();
