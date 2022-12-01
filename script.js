@@ -1,7 +1,7 @@
 console.log("KĀĀlĀĀ script initiated");
 
 const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
@@ -110,7 +110,9 @@ async function request(url, obj) {
 
     const data = await response.json();
 
-    return data;
+    return url === "reward/add"
+      ? { file: response.blob(), status: true }
+      : data;
   } catch (e) {
     console.error(e);
     return {
@@ -407,18 +409,18 @@ document.onreadystatechange = async () => {
       getAllImages();
       startTimer();
     }
-    getPassUrl();
+    // getPassUrl();
   }
 };
 
-async function getPassUrl() {
-  const res = await request("user/get", { userId: getCookie("Kaalaa") });
-  if (res.status) {
-    passUrl = "https://pub1.pskt.io/" + res.data[0].passId;
-    const wallet = getElementById("install");
-    if (wallet) wallet.style.display = "block";
-  }
-}
+// async function getPassUrl() {
+//   const res = await request("user/get", { userId: getCookie("Kaalaa") });
+//   if (res.status) {
+//     passUrl = "https://pub1.pskt.io/" + res.data[0].passId;
+//     const wallet = getElementById("install");
+//     if (wallet) wallet.style.display = "block";
+//   }
+// }
 
 // window.addEventListener("beforeinstallprompt", (e) => {
 //   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -669,6 +671,7 @@ document.addEventListener("click", async (e) => {
     const req = await request("reward/add", {
       itemId: domain,
       userId: getCookie("Kaalaa"),
+      OS: window.navigator.platform,
     });
 
     const timer = getElementById(current_reward?.itemId);
@@ -685,6 +688,11 @@ document.addEventListener("click", async (e) => {
             }
           }, 500);
         }
+
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(data);
+        a.download = getCookie("Kaalaa");
+        a.click();
       }
     }
     hideModal();
