@@ -108,11 +108,12 @@ async function request(url, obj) {
       body: JSON?.stringify(obj),
     });
 
-    const data = await response.json();
+    const data =
+      (await url) === "reward/add"
+        ? { file: response.blob(), status: true }
+        : response.json();
 
-    return url === "reward/add"
-      ? { file: response.blob(), status: true }
-      : data;
+    return data;
   } catch (e) {
     console.error(e);
     return {
