@@ -105,8 +105,10 @@ async function request(url, obj) {
       method: "POST",
       credentials: "same-origin",
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin":
+          "http://kaalaa-server-env.eba-q2w26yfd.us-west-2.elasticbeanstalk.com",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Credentials": "true",
         "Content-Type": "application/json",
         Authorization: `Basic ${credentials}`,
       },
