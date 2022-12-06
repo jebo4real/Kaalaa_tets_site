@@ -1,6 +1,9 @@
 console.log("KĀĀlĀĀ script initiated");
 
-const url = ["http://kaalaa-server-env.eba-q2w26yfd.us-west-2.elasticbeanstalk.com/", "http://localhost:5050/"];
+const url = [
+  "http://kaalaa-server-env.eba-q2w26yfd.us-west-2.elasticbeanstalk.com/",
+  "http://localhost:5050/",
+];
 const baseURL = url[0];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
@@ -102,6 +105,8 @@ async function request(url, obj) {
       method: "POST",
       credentials: "same-origin",
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Content-Type": "application/json",
         Authorization: `Basic ${credentials}`,
       },
