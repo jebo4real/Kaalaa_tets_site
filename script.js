@@ -103,7 +103,6 @@ async function request(url, obj) {
 
     const response = await fetch(baseURL + url, {
       method: "POST",
-      credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Basic ${credentials}`,
