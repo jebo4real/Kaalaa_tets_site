@@ -1,6 +1,6 @@
 console.log("KĀĀlĀĀ script initiated");
 
-const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
+const url = ["http://kaalaa-server-env.eba-q2w26yfd.us-west-2.elasticbeanstalk.com/", "http://localhost:5050/"];
 const baseURL = url[0];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
