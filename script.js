@@ -104,7 +104,8 @@ async function request(url, obj) {
     const response = await fetch(baseURL + url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Basic ${credentials}`,
       },
       body: JSON?.stringify(obj),
@@ -377,6 +378,7 @@ document.onreadystatechange = async () => {
     let cookie = getCookie("Kaalaa");
     if (!cookie) {
       if (localStorage.getItem("Kaalaa")) {
+        console.log({userId: localStorage.getItem("Kaalaa")})
         setCookie("Kaalaa", localStorage.getItem("Kaalaa"), 1);
         createDownload();
       } else
