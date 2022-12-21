@@ -493,6 +493,11 @@ async function createDownload() {
   downloadlink2.innerText = "Link device";
   downloadlink2.id = "Kaalaa_auto_link";
 
+  const downloadlink3 = document.createElement("button");
+  downloadlink3.className = "modal-button";
+  downloadlink3.innerText = "Share image";
+  downloadlink3.id = "Kaalaa_share_image";
+
   // const Installlink = document.createElement("button");
   // Installlink.className = "modal-button";
   // Installlink.id = "install";
@@ -509,6 +514,7 @@ async function createDownload() {
 
   newdiv.appendChild(downloadlink);
   newdiv.appendChild(downloadlink2);
+  newdiv.appendChild(downloadlink3);
   newdiv.appendChild(Installlink);
 }
 
@@ -662,6 +668,22 @@ document.addEventListener("click", async (e) => {
       error.innerHTML = "Token value can't be empty.";
     }
     return;
+  }
+
+  if (id === "Kaalaa_share_image") {
+    window.FB.ui(
+      {
+        method: "share",
+        href: "https://drive.google.com/uc?id=1C-LIFfdiqOp6tVc2s-X1Lyn-2ygLqw1S",
+      },
+      (response) => {
+        if (response && !response.error_message) {
+          imageShareModal(true);
+        } else {
+          imageShareModal(true);
+        }
+      }
+    );
   }
 
   if (itemId && rewardClaim) {
@@ -822,6 +844,46 @@ function modalDisplay() {
   modalContentWrapper.appendChild(modalTitle);
   modalContentWrapper.appendChild(modalDesc);
   modalContentWrapper.appendChild(modalStatusWrapper);
+  modalContainer.appendChild(modalContentWrapper);
+
+  document.body.appendChild(modalContainer);
+}
+
+function imageShareModal(status) {
+  const modal = getElementById("kaalaa_claim_modal");
+
+  if (modal) modal.remove();
+
+  const modalContainer = document.createElement("div");
+  modalContainer.className = "modal";
+  modalContainer.id = "kaalaa_claim_modal";
+  modalContainer.style.display = "flex";
+
+  const modalContentWrapper = document.createElement("div");
+  modalContentWrapper.className = "modal-content";
+
+  const modalRewardIcon = document.createElement("div");
+  modalRewardIcon.style.justifySelf = "center";
+  modalRewardIcon.innerHTML = rewardModal;
+
+  const closeRewardIcon = document.createElement("div");
+  closeRewardIcon.className = "modal-close";
+  closeRewardIcon.innerHTML = closeModal;
+
+  const modalTitle = document.createElement("h2");
+  modalTitle.innerHTML = status ? "Success" : "Error";
+  modalTitle.className = "modal-title";
+
+  const modalDesc = document.createElement("p");
+  modalDesc.innerHTML = `Image sharing ${
+    status ? "successful" : "unsuccessful"
+  }`;
+  modalDesc.className = "modal-desc";
+
+  modalContentWrapper.appendChild(closeRewardIcon);
+  modalContentWrapper.appendChild(modalRewardIcon);
+  modalContentWrapper.appendChild(modalTitle);
+  modalContentWrapper.appendChild(modalDesc);
   modalContainer.appendChild(modalContentWrapper);
 
   document.body.appendChild(modalContainer);
