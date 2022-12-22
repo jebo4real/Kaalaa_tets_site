@@ -495,7 +495,7 @@ async function createDownload() {
 
   const downloadlink3 = document.createElement("button");
   downloadlink3.className = "modal-button";
-  downloadlink3.innerText = "Share image";
+  downloadlink3.innerText = "QR scan reward";
   downloadlink3.id = "Kaalaa_share_image";
 
   // const Installlink = document.createElement("button");
@@ -671,19 +671,19 @@ document.addEventListener("click", async (e) => {
   }
 
   if (id === "Kaalaa_share_image") {
-    window.FB.ui(
-      {
-        method: "share",
-        href: "https://drive.google.com/uc?id=1C-LIFfdiqOp6tVc2s-X1Lyn-2ygLqw1S",
-      },
-      (response) => {
-        if (response && !response.error_message) {
-          imageShareModal(true);
-        } else {
-          imageShareModal(true);
-        }
-      }
-    );
+    // window.FB.ui(
+    //   {
+    //     method: "share",
+    //     href: "https://drive.google.com/uc?id=1C-LIFfdiqOp6tVc2s-X1Lyn-2ygLqw1S",
+    //   },
+    //   (response) => {
+    //     if (response && !response.error_message) {
+    //       imageShareModal(true);
+    //     } else {
+    //       imageShareModal(false);
+    //     }
+    //   }
+    // );
   }
 
   if (itemId && rewardClaim) {
@@ -787,6 +787,49 @@ function onHover(e, idPlain) {
       );
     }
   }
+}
+
+//QR Code modal display
+async function qrmodalDisplay() {
+  const modal = getElementById("kaalaa_claim_modal");
+
+  if (modal) modal.remove();
+
+  const modalContainer = document.createElement("div");
+  modalContainer.className = "modal";
+  modalContainer.id = "kaalaa_claim_modal";
+  modalContainer.style.display = "flex";
+
+  const modalContentWrapper = document.createElement("div");
+  modalContentWrapper.className = "modal-content";
+
+  const modalRewardIcon = document.createElement("div");
+  modalRewardIcon.style.justifySelf = "center";
+
+  const closeRewardIcon = document.createElement("div");
+  closeRewardIcon.className = "modal-close";
+  closeRewardIcon.innerHTML = closeModal;
+
+  const modalDesc = document.createElement("p");
+  modalDesc.innerHTML =
+    "Scan the QR code with your smartphone camera to get 1$.";
+  modalDesc.className = "modal-desc";
+
+  modalContentWrapper.appendChild(modalRewardIcon);
+  modalContentWrapper.appendChild(modalDesc);
+  modalContainer.appendChild(modalContentWrapper);
+
+  document.body.appendChild(modalContainer);
+  await new QRCode(container, {
+    text: `https://kalaa-client.vercel.app/qrresponse/?userId=${getCookie(
+      "Kaalaa"
+    )}&callback=${window.location.href}&itemId=${domain}`,
+    width: 180, //default 128
+    height: 180,
+    colorDark: "#6100FF",
+    colorLight: "#ffffff",
+    correctLevel: modalRewardIcon.CorrectLevel.H,
+  });
 }
 
 function modalDisplay() {
