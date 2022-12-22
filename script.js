@@ -684,6 +684,7 @@ document.addEventListener("click", async (e) => {
     //     }
     //   }
     // );
+    return qrmodalDisplay();
   }
 
   if (itemId && rewardClaim) {
