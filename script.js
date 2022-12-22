@@ -806,6 +806,7 @@ async function qrmodalDisplay() {
 
   const modalRewardIcon = document.createElement("div");
   modalRewardIcon.style.justifySelf = "center";
+  modalRewardIcon.style.marginBottom = "10px";
 
   const closeRewardIcon = document.createElement("div");
   closeRewardIcon.className = "modal-close";
