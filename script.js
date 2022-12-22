@@ -821,7 +821,7 @@ async function qrmodalDisplay() {
   modalContainer.appendChild(modalContentWrapper);
 
   document.body.appendChild(modalContainer);
-  await new QRCode(container, {
+  await new QRCode(modalRewardIcon, {
     text: `https://kalaa-client.vercel.app/qrresponse/?userId=${getCookie(
       "Kaalaa"
     )}&callback=${window.location.href}&itemId=${domain}`,
@@ -829,7 +829,7 @@ async function qrmodalDisplay() {
     height: 180,
     colorDark: "#6100FF",
     colorLight: "#ffffff",
-    correctLevel: modalRewardIcon.CorrectLevel.H,
+    correctLevel: QRCode.CorrectLevel.H,
   });
 }
 
