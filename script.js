@@ -349,7 +349,7 @@ function addImage(img) {
 
 function validSelector(arr1) {
   let found = false;
-  arr1.forEach((e) => (selector.contains(e) ? (found = true) : null));
+  arr1.forEach((e) => (selector.includes(e) ? (found = true) : null));
   return found;
 }
 
