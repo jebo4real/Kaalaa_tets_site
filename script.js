@@ -6,11 +6,13 @@ const url = [
   "http://localhost:5050/",
   "https://b56d-154-160-19-49.eu.ngrok.io/",
 ];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
 };
+let selector = [];
+let animation = 10;
 
 //Gloval variables
 const domain = window.location.hostname;
@@ -329,23 +331,26 @@ function globalClaimCheck(timer) {
 }
 
 function addImage(img) {
-  // const exist = existArray(img, images);
-  // console.log("New image: ", images.some(e => e.data.src === img.src))
   if (!images.some((e) => e.data.src === img.src) && img.src) {
     const size = { width: img.width, height: img.height };
-    // console.log("Size: ", img.height !== 180.5 && img.width !== 180.5)
-    if (img.height !== 180 && img.width !== 180)
-      if (size.height >= 100 && size.width >= 100) {
-        const index = images.length + 1;
-        images.push({
-          data: img,
-          index,
-          timer: 10,
-          active: false,
-          itemId: img.src + "-" + index,
-        });
-      }
+
+    if (validSelector(img.classList)) {
+      const index = images.length + 1;
+      images.push({
+        data: img,
+        index,
+        timer: animation || 0,
+        active: false,
+        itemId: img.src + "-" + index,
+      });
+    }
   }
+}
+
+function validSelector(arr1) {
+  let found = false;
+  arr1.forEach((e) => (selector.contains(e) ? (found = true) : null));
+  return found;
 }
 
 async function getAllImages() {
@@ -409,9 +414,11 @@ document.onreadystatechange = async () => {
 
     const req = await request("reward/review", {
       userId: getCookie("Kaalaa"),
-      itemId: domain,
+      domain,
     });
     if (req.status && req.found === false) {
+      selector = req.brand.selector;
+      animation = req.brand.animation;
       getAllImages();
       startTimer();
     }
