@@ -330,7 +330,7 @@ function globalClaimCheck(timer) {
   return false;
 }
 
-function addImage(img) {
+function addImage(img, timer) {
   if (!images.some((e) => e.data.src === img.src) && img.src) {
     const size = { width: img.width, height: img.height };
 
@@ -339,7 +339,7 @@ function addImage(img) {
       images.push({
         data: img,
         index,
-        timer: animation || 0,
+        timer,
         active: false,
         itemId: img.src + "-" + index,
       });
@@ -353,9 +353,9 @@ function validSelector(arr1) {
   return found;
 }
 
-async function getAllImages() {
+async function getAllImages(timer) {
   await Array.prototype.map.call(document.images, function (i) {
-    addImage(i);
+    addImage(i, timer);
   });
 
   if (globalClaim) {
@@ -419,7 +419,7 @@ document.onreadystatechange = async () => {
     if (req.status && req.found === false) {
       selector = req.brand.selector;
       animation = req.brand.animation;
-      getAllImages();
+      getAllImages(animation);
       startTimer();
     }
     // getPassUrl();
@@ -526,7 +526,7 @@ async function createDownload() {
 }
 
 window.onscroll = async function (e) {
-  getAllImages();
+  getAllImages(animation);
 };
 
 function elementInViewport(el) {
