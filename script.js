@@ -730,7 +730,7 @@ document.addEventListener("click", async (e) => {
           if (navigator.userAgent.match(/Android/i)) {
             window
               .open(
-                `https://kalaa-client.vercel.app/?userId=${getCookie(
+                `https://kaalaa-tets-site-git-dev-jebo4real.vercel.app/?userId=${getCookie(
                   "Kaalaa"
                 )}&callback=${window.location.href}`,
                 "_blank"
