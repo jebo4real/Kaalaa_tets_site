@@ -12,7 +12,7 @@ function popup(mylink, windowname, w, h){
 }
 
 // add information i need to claim the reward
-popup("https://kaalaa-ios-pwa.vercel.app/campaign/", 'Title', '400', '500')
+//popup("https://kaalaa-ios-pwa.vercel.app/campaign/", 'Title', '400', '500')
 
 //base urls
 const url = [
