@@ -76,6 +76,7 @@ const getMeta = async () => {
   };
 
   user = userMata;
+  console.log(user)
   return user;
 };
 
@@ -710,6 +711,7 @@ document.addEventListener("click", async (e) => {
       itemId: domain,
       userId: getCookie("Kaalaa"),
       OS: window.navigator.platform,
+      domain
     });
 
     const timer = getElementById(current_reward?.itemId);
