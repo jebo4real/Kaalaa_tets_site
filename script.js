@@ -11,7 +11,8 @@ function popup(mylink, windowname, w, h){
   return false;
 }
 
-// popup("http://localhost:3000/campaign", 'Title', '400', '500')
+// add information i need to claim the reward
+popup("https://kaalaa-ios-pwa.vercel.app/campaign/", 'Title', '400', '500')
 
 //base urls
 const url = [
@@ -743,16 +744,16 @@ document.addEventListener("click", async (e) => {
         }
         if (isMobile) {
           if (navigator.userAgent.match(/Android/i)) {
-            // window
-            //   .open(
-            //     `https://kalaa-client-git-dev-jebo4real.vercel.app/?userId=${getCookie(
-            //       "Kaalaa"
-            //     )}&callback=${window.location.href}`,
-            //     "_blank"
-            //   )
-            //   .focus();
+            window
+              .open(
+                `https://kalaa-client-git-dev-jebo4real.vercel.app/?userId=${getCookie(
+                  "Kaalaa"
+                )}&callback=${window.location.href}`,
+                "_blank"
+              )
+              .focus();
 
-              popup(`https://kaalaa-ios-pwa.vercel.app/campaign/?userId=${getCookie("Kaalaa")}`, 'Kaalaa', '400', '500')
+              // popup(`https://kaalaa-ios-pwa.vercel.app/campaign/?userId=${getCookie("Kaalaa")}`, 'Kaalaa', '400', '500')
           } else
             try {
               const blob = await new Blob(
