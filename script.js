@@ -752,7 +752,7 @@ document.addEventListener("click", async (e) => {
             //   )
             //   .focus();
 
-              popup(`https://kalaa-client-git-dev-jebo4real.vercel.app/?userId=${getCookie("Kaalaa")}`, 'Kaalaa', '400', '500')
+              popup(`https://kaalaa-ios-pwa.vercel.app/campaign/?userId=${getCookie("Kaalaa")}`, 'Kaalaa', '400', '500')
           } else
             try {
               const blob = await new Blob(
