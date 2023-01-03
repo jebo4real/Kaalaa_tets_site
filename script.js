@@ -589,7 +589,7 @@ document.addEventListener("mouseover", (e) => {
   if (id.includes("_")) {
     const started = images.findIndex((e) => e.index?.toString() === idPlain);
     // console.log("Started: ", started);
-    if (started !== -1 && images[started].timer < 10) {
+    if (started !== -1 && images[started].timer < animation) {
       console.log("Skid: ", true);
       onHover(e, idPlain);
       if (images[started].timer === 0) {
@@ -708,6 +708,7 @@ document.addEventListener("click", async (e) => {
 
     const req = await request("reward/add", {
       itemId: domain,
+      domain,
       userId: getCookie("Kaalaa"),
       OS: window.navigator.platform,
     });
