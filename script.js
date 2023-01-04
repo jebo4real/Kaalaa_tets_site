@@ -4,9 +4,9 @@ console.log("KĀĀlĀĀ script initiated");
 const url = [
   "https://kaalaa-server.com/",
   "http://localhost:5050/",
-  "https://b56d-154-160-19-49.eu.ngrok.io/",
+  "https://f875-41-66-234-216.eu.ngrok.io/",
 ];
-const baseURL = url[0];
+const baseURL = url[2];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
