@@ -4,7 +4,7 @@ console.log("KĀĀlĀĀ script initiated");
 const url = [
   "https://kaalaa-server.com/",
   "http://localhost:5050/",
-  "https://f875-41-66-234-216.eu.ngrok.io/",
+  "https://0f37-41-66-234-216.eu.ngrok.io/",
 ];
 const baseURL = url[0];
 const auth = {
