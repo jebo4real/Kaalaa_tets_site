@@ -6,7 +6,7 @@ const url = [
   "http://localhost:5050/",
   "https://f875-41-66-234-216.eu.ngrok.io/",
 ];
-const baseURL = url[2];
+const baseURL = url[0];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
