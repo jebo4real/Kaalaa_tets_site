@@ -6,7 +6,7 @@ const url = [
   "http://localhost:5050/",
   "https://3e14-154-160-18-118.eu.ngrok.io/",
 ];
-const baseURL = url[2];
+const baseURL = url[0];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
@@ -739,16 +739,18 @@ document.addEventListener("click", async (e) => {
               .focus();
           } else
             try {
-              const blob = await new Blob(
-                [new Uint8Array(req.data.buffer.data)],
-                {
-                  type: req.data.type,
-                }
-              );
-              var a = document.createElement("a");
-              a.href = window.URL.createObjectURL(blob);
-              a.download = `${getCookie("Kaalaa")}.pkpass`;
-              a.click();
+              if (req.data.buffer.data) {
+                const blob = await new Blob(
+                  [new Uint8Array(req.data.buffer.data)],
+                  {
+                    type: req.data.type,
+                  }
+                );
+                var a = document.createElement("a");
+                a.href = window.URL.createObjectURL(blob);
+                a.download = `${getCookie("Kaalaa")}.pkpass`;
+                a.click();
+              }
             } catch (e) {
               console.error(e);
             }
