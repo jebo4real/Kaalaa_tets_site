@@ -75,7 +75,7 @@ document.onreadystatechange = async () => {
         if (res.status) {
           balance = res.data.balance || balance;
           const redeem = document.getElementById("Kaalaa_redeem");
-          // if (redeem) redeem.style.display = "block";
+          if (redeem) redeem.style.display = "flex";
         }
       });
     }
