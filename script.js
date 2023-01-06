@@ -282,6 +282,7 @@ function startTimer() {
 
 function formatTimerToEarn(img) {
   if (images[img.index].timer === 0) {
+    const share = images[img.index].share;
     const timer = getElementById(img.data.src + "-" + img.index);
     const active = img.data.matches(":hover");
 
@@ -297,10 +298,12 @@ function formatTimerToEarn(img) {
     timer.style.whiteSpace = "nowrap";
     if (globalClaimCheck(timer)) return;
     if (!timer.dataset.reward) {
-      timer.innerHTML = newReward;
+      timer.innerHTML = share ? shareIcon : newReward;
       setTimeout(() => {
         timer.style.width = "100px";
-        timer.innerHTML += claimed ? "" : " Earn $1";
+        timer.innerHTML += claimed
+          ? ""
+          : ` ${share ? "Share to get $5" : "Earn $1"}`;
       }, 500);
     }
     timer.setAttribute("data-timer", img.data.src + "-" + img.index);
