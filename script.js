@@ -711,8 +711,9 @@ document.addEventListener("click", async (e) => {
   }
 
   if (e.target.dataset.image) {
+    console.log({src: e.target.dataset.image})
     return shareToFaceBook(e.target.dataset.image)
-      .then((e) => console.log("Shared"))
+      .then((e) => console.log("Shared: ", e))
       .catch((e) => console.error("Not shared"));
   }
 
