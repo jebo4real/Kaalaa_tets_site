@@ -251,7 +251,7 @@ function startTimer() {
             if (!timer.dataset.reward) {
               timer.innerHTML = share ? shareIcon : newReward;
               setTimeout(() => {
-                timer.style.width = share ? "150px" : "100px";
+                timer.style.width = share ? "170px" : "100px";
                 timer.innerHTML += claimed
                   ? ""
                   : ` ${share ? "Share to get $1" : "Earn $1"}`;
@@ -301,7 +301,7 @@ function formatTimerToEarn(img) {
     if (!timer.dataset.reward) {
       timer.innerHTML = share ? shareIcon : newReward;
       setTimeout(() => {
-        timer.style.width = share ? "150px" : "100px";
+        timer.style.width = share ? "170px" : "100px";
         timer.innerHTML += claimed
           ? ""
           : ` ${share ? "Share to get $1" : "Earn $1"}`;
