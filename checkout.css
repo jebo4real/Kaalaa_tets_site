@@ -4,9 +4,11 @@
   background: #6100ff;
   border-radius: 16px;
   display: flex;
+  flex-direction: row;
   border: none;
   outline: none;
   justify-content: space-between;
+  align-items: center;
   color: white;
   display: none;
 }
