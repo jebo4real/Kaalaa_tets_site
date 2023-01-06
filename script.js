@@ -370,7 +370,7 @@ function validSelector(arr1) {
     arr1.contains(e.name) ? (found = { share: false, amount: e.amount }) : null
   );
   shareSelector.forEach((e) =>
-    arr1.contains(e.name) ? (found = { share: false, amount: e.amount }) : null
+    arr1.contains(e.name) ? (found = { share: true, amount: e.amount }) : null
   );
   return found;
 }
@@ -906,7 +906,7 @@ function modalDisplay(amount) {
   modalTitle.className = "modal-title";
 
   const modalDesc = document.createElement("p");
-  modalDesc.innerHTML = `You have recieved ${amount} for having an interest in the product.`;
+  modalDesc.innerHTML = `You have recieved $${amount} for having an interest in the product.`;
   modalDesc.className = "modal-desc";
 
   const modalbutton1 = document.createElement("button");
