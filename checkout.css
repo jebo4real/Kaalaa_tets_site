@@ -10,6 +10,7 @@
   align-items: center;
   color: white;
   justify-content: space-between;
+  display: none;
 }
 
 .kaalaaRedeemButtonLeft {
