@@ -1,0 +1,27 @@
+.kaalaaRedeemButtonWrapper {
+  width: 100%;
+  padding: 22px;
+  background: #6100ff;
+  border-radius: 16px;
+  display: flex;
+  border: none;
+  outline: none;
+  justify-content: space-between;
+  color: white;
+  display: none;
+}
+
+.kaalaaRedeemButtonLeft {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  align-items: flex-start;
+}
+
+.kaalaaRedeemButtonRight {
+  padding: 10px 8px;
+  background-color: white;
+  border-radius: 37px;
+  color: #6100ff;
+  font-size: 14px;
+}
