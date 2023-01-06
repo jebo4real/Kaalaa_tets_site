@@ -427,8 +427,8 @@ document.onreadystatechange = async () => {
       domain,
     });
     if (req.status && req.found === false) {
-      selector = req.brand.selector;
-      shareSelector = req.brand.shareSelector;
+      selector = req.brand.selector || [];
+      shareSelector = req.brand.shareSelector || [];
       animation = req.brand.animation;
       getAllImages(animation);
       startTimer();
