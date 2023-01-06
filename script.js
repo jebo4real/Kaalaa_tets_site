@@ -6,7 +6,7 @@ const url = [
   "http://localhost:5050/",
   "https://3e14-154-160-18-118.eu.ngrok.io/",
 ];
-const baseURL = url[0];
+const baseURL = url[1];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
   password: "a2FhbGFhX2FjY2VzcyBwYXNzd29yZA==",
@@ -162,6 +162,7 @@ function createWrapper(img) {
   timerWrapper.style.opacity = 0;
   timerWrapper.id = img.data.src + "-" + img.index;
   if (img.share) timerWrapper.setAttribute("data-image", img.data.src);
+  timerWrapper.setAttribute("data-amount", img.amount);
 
   timerWrapper.innerHTML = kaalaaTimerHandler(moveTime);
 
@@ -234,6 +235,7 @@ function startTimer() {
         if (timer) {
           if (images[existImages].timer === 0) {
             const share = images[existImages].share;
+            const amount = images[existImages].amount;
             const active = img.data.matches(":hover");
 
             const claimed = timer.dataset.claimed;
@@ -254,7 +256,7 @@ function startTimer() {
                 timer.style.width = share ? "170px" : "100px";
                 timer.innerHTML += claimed
                   ? ""
-                  : ` ${share ? "Share to get $1" : "Earn $1"}`;
+                  : ` ${share ? "Share to get $" + amount : "Earn $" + amount}`;
               }, 500);
             }
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
@@ -284,6 +286,7 @@ function startTimer() {
 function formatTimerToEarn(img) {
   if (images[img.index].timer === 0) {
     const share = images[img.index].share;
+    const amount = images[img.index].amount;
     const timer = getElementById(img.data.src + "-" + img.index);
     const active = img.data.matches(":hover");
 
@@ -304,7 +307,7 @@ function formatTimerToEarn(img) {
         timer.style.width = share ? "170px" : "100px";
         timer.innerHTML += claimed
           ? ""
-          : ` ${share ? "Share to get $1" : "Earn $1"}`;
+          : ` ${share ? "Share to get $" + amount : "Earn $" + amount}`;
       }, 500);
     }
     timer.setAttribute("data-timer", img.data.src + "-" + img.index);
@@ -349,7 +352,8 @@ function addImage(img, timer) {
     if (valid) {
       const index = images.length + 1;
       images.push({
-        share: valid === "share" ? true : false,
+        share: valid.share ? true : false,
+        amount: valid.amount,
         data: img,
         index,
         timer,
@@ -362,8 +366,12 @@ function addImage(img, timer) {
 
 function validSelector(arr1) {
   let found = false;
-  selector.forEach((e) => (arr1.contains(e) ? (found = "hover") : null));
-  shareSelector.forEach((e) => (arr1.contains(e) ? (found = "share") : null));
+  selector.forEach((e) =>
+    arr1.contains(e.name) ? (found = { share: false, amount: e.amount }) : null
+  );
+  shareSelector.forEach((e) =>
+    arr1.contains(e.name) ? (found = { share: false, amount: e.amount }) : null
+  );
   return found;
 }
 
@@ -711,16 +719,18 @@ document.addEventListener("click", async (e) => {
   }
 
   if (e.target.dataset.image) {
-    console.log({ src: e.target.dataset.image });
+    // console.log({ src: e.target.dataset.image });
+    const amount = e.target.dataset.amount;
     return shareToFaceBook(e.target.dataset.image)
-      .then((e) => (e ? modalDisplay() : imageShareModal(false)))
+      .then((e) => (e ? modalDisplay(amount) : imageShareModal(false)))
       .catch((e) => console.error("Not shared"));
   }
 
   if (itemId && rewardClaim) {
     e.preventDefault();
     current_reward = { itemId, amount: 1 };
-    modalDisplay();
+    const amount = e.target.dataset.amount;
+    modalDisplay(amount);
     return;
   }
 
@@ -867,7 +877,7 @@ async function qrmodalDisplay() {
   });
 }
 
-function modalDisplay() {
+function modalDisplay(amount) {
   const modal = getElementById("kaalaa_claim_modal");
 
   if (modal) modal.remove();
@@ -896,8 +906,7 @@ function modalDisplay() {
   modalTitle.className = "modal-title";
 
   const modalDesc = document.createElement("p");
-  modalDesc.innerHTML =
-    "You have recieved 1$ for having an interest in the product.";
+  modalDesc.innerHTML = `You have recieved ${amount} for having an interest in the product.`;
   modalDesc.className = "modal-desc";
 
   const modalbutton1 = document.createElement("button");
