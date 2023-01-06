@@ -251,10 +251,10 @@ function startTimer() {
             if (!timer.dataset.reward) {
               timer.innerHTML = share ? shareIcon : newReward;
               setTimeout(() => {
-                timer.style.width = "min-content";
+                timer.style.width = share ? "150px" : "100px";
                 timer.innerHTML += claimed
                   ? ""
-                  : ` ${share ? "Share to get $5" : "Earn $1"}`;
+                  : ` ${share ? "Share to get $1" : "Earn $1"}`;
               }, 500);
             }
             timer.setAttribute("data-timer", img.data.src + "-" + img.index);
@@ -301,10 +301,10 @@ function formatTimerToEarn(img) {
     if (!timer.dataset.reward) {
       timer.innerHTML = share ? shareIcon : newReward;
       setTimeout(() => {
-        timer.style.width = "min-content";
+        timer.style.width = share ? "150px" : "100px";
         timer.innerHTML += claimed
           ? ""
-          : ` ${share ? "Share to get $5" : "Earn $1"}`;
+          : ` ${share ? "Share to get $1" : "Earn $1"}`;
       }, 500);
     }
     timer.setAttribute("data-timer", img.data.src + "-" + img.index);
@@ -711,9 +711,9 @@ document.addEventListener("click", async (e) => {
   }
 
   if (e.target.dataset.image) {
-    console.log({src: e.target.dataset.image})
+    console.log({ src: e.target.dataset.image });
     return shareToFaceBook(e.target.dataset.image)
-      .then((e) => console.log("Shared: ", e))
+      .then((e) => (e ? modalDisplay() : imageShareModal(false)))
       .catch((e) => console.error("Not shared"));
   }
 
@@ -1084,7 +1084,7 @@ const shareToFaceBook = async function (image) {
       window.FB.ui(
         {
           method: "share",
-          href: window.location.hostname + image,
+          href: image,
         },
         (response) => {
           if (response && !response.error_message) {
