@@ -20,6 +20,7 @@
 }
 
 .kaalaaRedeemButtonRight {
+  display: flex;
   padding: 10px 8px;
   background-color: white;
   border-radius: 37px;
