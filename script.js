@@ -300,7 +300,7 @@ function formatTimerToEarn(img) {
     if (!timer.dataset.reward) {
       timer.innerHTML = share ? shareIcon : newReward;
       setTimeout(() => {
-        timer.style.width = "100px";
+        timer.style.width = "min-content";
         timer.innerHTML += claimed
           ? ""
           : ` ${share ? "Share to get $5" : "Earn $1"}`;
