@@ -957,6 +957,7 @@ function imageShareModal(status) {
     status ? "successful" : "unsuccessful"
   }`;
   modalDesc.className = "modal-desc";
+  modalDesc.style.width.minWidth = "170px";
 
   modalContentWrapper.appendChild(closeRewardIcon);
   modalContentWrapper.appendChild(modalRewardIcon);
