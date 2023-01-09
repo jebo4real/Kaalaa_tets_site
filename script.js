@@ -353,7 +353,7 @@ function addImage(img, timer) {
     const valid = validSelector(img.classList);
     if (valid) {
       const index = images.length + 1;
-      images.push({
+      const imagePayload = {
         share: valid.share ? true : false,
         selector: valid.selector,
         amount: valid.amount,
@@ -362,7 +362,9 @@ function addImage(img, timer) {
         timer,
         active: false,
         itemId: img.src + "-" + index,
-      });
+      }
+      console.log({imagePayload})
+      images.push(imagePayload);
     }
   }
 }
