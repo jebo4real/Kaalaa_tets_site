@@ -659,6 +659,10 @@ document.addEventListener("click", async (e) => {
 
   const itemId = e.target.dataset.timer;
   const rewardClaim = e.target.dataset.reward;
+  const share = e.target.dataset.share === "yes" ? true : false;
+  const selector = e.target.dataset.selector;
+
+  console.log({share, selector})
 
   if (!e.target.href || e.target.href === "") e.preventDefault();
 
@@ -749,8 +753,6 @@ document.addEventListener("click", async (e) => {
     if (modalStatus) {
       modalStatus.innerHTML = request_loader;
     }
-    const share = e.target.dataset.share === "yes" ? true : false;
-    const selector = e.target.dataset.selector;
     const payload = {
       itemId: domain,
       domain,
