@@ -739,14 +739,17 @@ document.addEventListener("click", async (e) => {
     e.preventDefault();
     const modalStatus = getElementById("modalStatusContainer");
     if (modalStatus) modalStatus.innerHTML = request_loader;
-
-    const req = await request("reward/add", {
+    const payload = {
       itemId: domain,
       domain,
       userId: getCookie("Kaalaa"),
       share: e.target.dataset.share,
-      OS: window.navigator.platform
-    });
+      OS: window.navigator.platform,
+    };
+
+    console.log({payload})
+
+    const req = await request("reward/add", payload);
 
     const timer = getElementById(current_reward?.itemId);
     if (timer && req.status) {
