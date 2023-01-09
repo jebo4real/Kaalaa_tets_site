@@ -746,7 +746,7 @@ document.addEventListener("click", async (e) => {
       domain,
       userId: getCookie("Kaalaa"),
       share,
-      OS: window.navigator.platform,
+      OS: window.navigator.platform
     });
 
     const timer = getElementById(current_reward?.itemId);
