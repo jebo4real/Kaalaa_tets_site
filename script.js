@@ -164,6 +164,7 @@ function createWrapper(img) {
   if (img.share) timerWrapper.setAttribute("data-image", img.data.src);
   timerWrapper.setAttribute("data-share", img.share ? "yes" : "no");
   timerWrapper.setAttribute("data-amount", img.amount);
+  timerWrapper.setAttribute("data-selector", img.selector);
 
   timerWrapper.innerHTML = kaalaaTimerHandler(moveTime);
 
@@ -354,6 +355,7 @@ function addImage(img, timer) {
       const index = images.length + 1;
       images.push({
         share: valid.share ? true : false,
+        selector: valid.selector,
         amount: valid.amount,
         data: img,
         index,
@@ -368,10 +370,14 @@ function addImage(img, timer) {
 function validSelector(arr1) {
   let found = false;
   selector.forEach((e) =>
-    arr1.contains(e.name) ? (found = { share: false, amount: e.amount }) : null
+    arr1.contains(e.name)
+      ? (found = { share: false, amount: e.amount, selector: e.name })
+      : null
   );
   shareSelector.forEach((e) =>
-    arr1.contains(e.name) ? (found = { share: true, amount: e.amount }) : null
+    arr1.contains(e.name)
+      ? (found = { share: true, amount: e.amount, selector: e.name })
+      : null
   );
   return found;
 }
@@ -739,15 +745,17 @@ document.addEventListener("click", async (e) => {
     e.preventDefault();
     const modalStatus = getElementById("modalStatusContainer");
     if (modalStatus) modalStatus.innerHTML = request_loader;
+    const selector = e.target.classList;
     const payload = {
       itemId: domain,
       domain,
       userId: getCookie("Kaalaa"),
       share: e.target.dataset.share === "yes" ? true : false,
+      selector: e.target.dataset.selector,
       OS: window.navigator.platform,
     };
 
-    console.log({payload})
+    console.log({ payload });
 
     const req = await request("reward/add", payload);
 
