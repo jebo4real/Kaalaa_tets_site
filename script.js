@@ -659,10 +659,8 @@ document.addEventListener("click", async (e) => {
 
   const itemId = e.target.dataset.timer;
   const rewardClaim = e.target.dataset.reward;
-  const share = e.target.dataset.share === "yes" ? true : false;
-  const selector = e.target.dataset.selector;
 
-  console.log({share, selector})
+  console.log({ share, selector });
 
   if (!e.target.href || e.target.href === "") e.preventDefault();
 
@@ -735,7 +733,9 @@ document.addEventListener("click", async (e) => {
     // console.log({ src: e.target.dataset.image });
     const amount = e.target.dataset.amount;
     return shareToFaceBook(e.target.dataset.image)
-      .then((e) => (e ? modalDisplay(amount) : imageShareModal(false)))
+      .then((e) =>
+        e ? modalDisplay(amount, share, selector) : imageShareModal(false)
+      )
       .catch((e) => console.error("Not shared"));
   }
 
@@ -743,7 +743,7 @@ document.addEventListener("click", async (e) => {
     e.preventDefault();
     current_reward = { itemId, amount: 1 };
     const amount = e.target.dataset.amount;
-    modalDisplay(amount);
+    modalDisplay(amount, share, selector);
     return;
   }
 
@@ -897,7 +897,7 @@ async function qrmodalDisplay() {
   });
 }
 
-function modalDisplay(amount) {
+function modalDisplay(amount, share, selector) {
   const modal = getElementById("kaalaa_claim_modal");
 
   if (modal) modal.remove();
@@ -933,6 +933,8 @@ function modalDisplay(amount) {
   modalbutton1.innerHTML = "ACCEPT";
   modalbutton1.id = "claim_reward_button";
   modalbutton1.className = "modal-button";
+  modalbutton1.setAttribute("data-share", share ? "yes" : "no");
+  modalbutton1.setAttribute("data-selector", selector);
 
   // const modalbutton2 = document.createElement("button");
   // modalbutton2.innerHTML = "Buy with earnings";
