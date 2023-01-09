@@ -162,6 +162,7 @@ function createWrapper(img) {
   timerWrapper.style.opacity = 0;
   timerWrapper.id = img.data.src + "-" + img.index;
   if (img.share) timerWrapper.setAttribute("data-image", img.data.src);
+  timerWrapper.setAttribute("data-share", img.share);
   timerWrapper.setAttribute("data-amount", img.amount);
 
   timerWrapper.innerHTML = kaalaaTimerHandler(moveTime);
@@ -739,10 +740,12 @@ document.addEventListener("click", async (e) => {
     const modalStatus = getElementById("modalStatusContainer");
     if (modalStatus) modalStatus.innerHTML = request_loader;
 
+    const share = e.target.dataset.share;
     const req = await request("reward/add", {
       itemId: domain,
       domain,
       userId: getCookie("Kaalaa"),
+      share,
       OS: window.navigator.platform,
     });
 
