@@ -362,8 +362,8 @@ function addImage(img, timer) {
         timer,
         active: false,
         itemId: img.src + "-" + index,
-      }
-      console.log({imagePayload})
+      };
+      console.log({ imagePayload });
       images.push(imagePayload);
     }
   }
@@ -746,14 +746,17 @@ document.addEventListener("click", async (e) => {
   if (id === "claim_reward_button") {
     e.preventDefault();
     const modalStatus = getElementById("modalStatusContainer");
-    if (modalStatus) modalStatus.innerHTML = request_loader;
-    const selector = e.target.classList;
+    if (modalStatus) {
+      modalStatus.innerHTML = request_loader;
+    }
+    const share = e.target.dataset.share === "yes" ? true : false;
+    const selector = e.target.dataset.selector;
     const payload = {
       itemId: domain,
       domain,
       userId: getCookie("Kaalaa"),
-      share: e.target.dataset.share === "yes" ? true : false,
-      selector: e.target.dataset.selector,
+      share,
+      selector,
       OS: window.navigator.platform,
     };
 
