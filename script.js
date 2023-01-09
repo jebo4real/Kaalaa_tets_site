@@ -740,12 +740,11 @@ document.addEventListener("click", async (e) => {
     const modalStatus = getElementById("modalStatusContainer");
     if (modalStatus) modalStatus.innerHTML = request_loader;
 
-    const share = e.target.dataset.share;
     const req = await request("reward/add", {
       itemId: domain,
       domain,
       userId: getCookie("Kaalaa"),
-      share,
+      share: e.target.dataset.share,
       OS: window.navigator.platform
     });
 
