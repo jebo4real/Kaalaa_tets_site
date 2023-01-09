@@ -363,7 +363,7 @@ function addImage(img, timer) {
         active: false,
         itemId: img.src + "-" + index,
       };
-      console.log({ imagePayload });
+      // console.log({ imagePayload });
       images.push(imagePayload);
     }
   }
@@ -660,7 +660,10 @@ document.addEventListener("click", async (e) => {
   const itemId = e.target.dataset.timer;
   const rewardClaim = e.target.dataset.reward;
 
-  console.log({ share, selector });
+  const share = e.target.dataset.share === "yes" ? true : false;
+  const selector = e.target.dataset.selector;
+
+  // console.log({ share, selector });
 
   if (!e.target.href || e.target.href === "") e.preventDefault();
 
