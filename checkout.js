@@ -1,7 +1,11 @@
 console.log("KĀĀlĀĀ checkout script initiated");
 
 let rewards = 0;
-const url = ["https://kaalaa-app.herokuapp.com/", "http://localhost:5050/"];
+const url = [
+  "https://kaalaa-server.com/",
+  "http://localhost:5050/",
+  "https://3e14-154-160-18-118.eu.ngrok.io/",
+];
 const baseURL = url[0];
 const auth = {
   username: "a2FhbGFhX2FjY2VzcyB1c2VybmFtZQ==",
@@ -71,7 +75,7 @@ document.onreadystatechange = async () => {
         if (res.status) {
           balance = res.data.balance || balance;
           const redeem = document.getElementById("Kaalaa_redeem");
-          if (redeem) redeem.style.display = "block";
+          if (redeem) redeem.style.display = "flex";
         }
       });
     }
